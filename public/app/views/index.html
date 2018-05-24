@@ -1,0 +1,74 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="#">
+
+    <title>vTrans</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Angular -->
+    <script src="assets/js/angular.js"></script>
+    <script src="assets/js/angular-route.js"></script>
+    <script src="/app/app.js"></script>
+    <script src="/app/routes.js"></script>
+    
+  </head>
+
+  <body ng-app="myApp" style="background-color: #E9EBEE">
+
+    <nav class="navbar navbar-expand-md navbar-light" style="background-color: rgb(188, 235, 219)">
+      <div class="container">
+
+        <a class="navbar-brand" href="#">vTrans</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/profile">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/messages">Messages</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+              <div class="dropdown-menu" aria-labelledby="dropdown01">
+                <a class="dropdown-item" href="#">Logout</a>
+                <a class="dropdown-item" href="#">Setting</a>
+                <a class="dropdown-item" href="#">Some other option</a>
+              </div>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search" aria-label="Search">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="submit">Search</button>
+                </div>
+              </div>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container" ng-view></div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/assets/js/jquery-3.3.1.js"></script>
+    <script src="/assets/js/bootstrap.js"></script>
+
+  </body>
+</html>
