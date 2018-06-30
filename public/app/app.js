@@ -1,1 +1,1 @@
-angular.module('myApp', ['appRoutes']);
+angular.module('myApp', ['appRoutes', 'postControllers']);

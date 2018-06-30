@@ -1,0 +1,102 @@
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../fonts/open-sans/OpenSans-Light.ttf');
+}
+
+body {
+    font-family: 'Open Sans' !important;
+    font-size: 0.9rem !important;
+    background-color: #F5F8FA !important;
+}
+
+.p-0 {
+    padding: 0;
+}
+
+.mt-0 {
+    margin-top: 0;
+}
+
+.mr-0 {
+    margin-right: 0;
+}
+
+.ml-0 {
+    margin-left: 0;
+}
+
+.mb-0 {
+    margin-bottom: 0;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+.mr-20 {
+    margin-right: 20px;
+}
+
+
+/* Left postion of profile */
+#profile-details {
+    margin-bottom: 15px;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+}
+
+#cover-photo {
+    height: 150px;
+    background-image: url("../cover.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 150px;
+    border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+#profile-main-details {
+    text-align: center;
+    padding: 15px;
+}
+
+#profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    margin-bottom: 5px;
+    margin-top: -55px;
+}
+
+#about-div {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+    margin-bottom: 15px;
+}
+
+#photos-div {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+}
+
+
+/* Main portion that is timeline */
+#new-post-div {
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+    padding: 20px;
+    background-color: #FFFFFF;
+}
+
+.icon::before {
+    content: url('../icons/baseline-local_post_office-black-18/1x/baseline_local_post_office_black_18dp.png');
+    height: 36px;
+    width: 36px;
+}
+

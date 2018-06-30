@@ -1,15 +1,13 @@
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
-var morgan = require('morgan');
-var mongoose = require('mongoose');
-var router= express.Router();
-var appRoutes= require('./app/routes/api')(router);
-var path=require('path');
+require('./app/config/config');
 
-
-var port = process.env.PORT || 8080;
-var url = 'mongodb://localhost:27017/projectDB';
+const express = require('express');
+const app = express();
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const morgan = require('morgan');
+const router= express.Router();
+const appRoutes= require('./app/routes/api')(router);
+const path=require('path');
 
 
 app.use(morgan('dev'));
@@ -19,18 +17,12 @@ app.use(express.static(__dirname + '/public'));
 app.use('/api',appRoutes);
 
 
-mongoose.connect(url, function(err) {
-    if(err) {
-        console.log('Not connected to mongodb', err);
-    } else {
-        console.log('Connected to mongodb');
-    }
-});
+mongoose.connect(process.env.MONGODB_URI);
 
 app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/app/views/index.html'));
 });
 
-app.listen(port, function(err) {
-    console.log('Server is listening on port ', port);
+app.listen(process.env.PORT, function(err) {
+    console.log('Server is listening on port ', process.env.PORT);
 });

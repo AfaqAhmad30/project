@@ -9,22 +9,28 @@
     <meta name="author" content="">
     <link rel="icon" href="#">
 
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/assets/css/home.css">
+    <link rel="stylesheet" href="/assets/css/profile.css">
+
     <title>vTrans</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Angular -->
-    <script src="assets/js/angular.js"></script>
-    <script src="assets/js/angular-route.js"></script>
+    <script src="/assets/js/angular.js"></script>
+    <script src="/assets/js/angular-route.js"></script>
     <script src="/app/app.js"></script>
     <script src="/app/routes.js"></script>
+    <script src="/app/services/fileServices.js"></script>
+    <script src="/app/controllers/postCtrl.js"></script>
     
   </head>
 
-  <body ng-app="myApp" style="background-color: #E9EBEE">
+  <body ng-app="myApp">
 
-    <nav class="navbar navbar-expand-md navbar-light" style="background-color: rgb(188, 235, 219)">
+    <nav class="navbar navbar-expand-md navbar-light" style="background-color: #68CCC4;">
       <div class="container">
 
         <a class="navbar-brand" href="#">vTrans</a>
@@ -64,7 +70,7 @@
       </div>
     </nav>
 
-    <div class="container" ng-view></div>
+    <div ng-view></div>
 
     <!-- Bootstrap core JavaScript -->
     <script src="/assets/js/jquery-3.3.1.js"></script>

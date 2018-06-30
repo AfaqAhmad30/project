@@ -1,1 +1,57 @@
-<h1>User Profile</h1>
+<div>
+    <div>
+        <img src="#" alt="cover photo">
+    </div>
+    <div>
+        <div>
+            <img src="#" alt="profile photo">
+        </div>
+        <ul>
+            <li>
+                <a href="#">Post</a>
+            </li>
+            <li>
+                <a href="#">Following</a>
+            </li>
+            <li>
+                <a href="#">Followers</a>
+            </li>
+            <li>
+                <a href="#">Media</a>
+            </li>
+            <li>
+                <a href="#">Edit Profile</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div>
+    <div>
+        <h6>Saleh Banoori</h6>
+        <ul>
+            <li>Bio</li>
+            <li>From</li>
+            <li>DOB</li>
+            <li>Joined</li>
+        </ul>
+    </div>
+    <div ng-controller="postCtrl">
+        <div>
+            <form enctype="multipart/form-data">
+                <input type="text" ng-model="description" placeholder="Write something!">
+                <input type = "file" file-model = "myFile" name="file"/>
+                <button ng-click = "addNewPost()">Post</button>
+            </form>
+        </div>
+        <br>
+        <div>
+            <div ng-repeat="post in posts">
+                <h6>{{ post.author.fullName }}</h6>
+                <p><small>{{ post.time }}</small></p>
+                <p>{{ post.description }}</p>
+                <hr>
+            </div>
+        </div>
+    </div>
+</div>
