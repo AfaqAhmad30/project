@@ -1,1 +1,18 @@
-<h1>User Profile</h1>
+<div> 
+    <h1 style="text-transform: capitalize">{{ main.firstName }}'s Profile</h1>
+</div>
+<div class="panel panel-info">
+    <div class="panel-heading" style="text-align: center; background: dodgerblue"><strong style="text-transform: capitalize">{{main.firstName + main.lastName}}'s BioData</strong></div>
+<table class="table">
+    <tr>
+        <td>First Name</td>
+        <td>Email Address</td>
+        <td>Date Of Birth</td>
+    </tr>
+    <tr>
+        <td style="text-transform: capitalize">{{ main.firstName}}</td>
+        <td>{{ main.email}}</td>
+        <td>{{ main.DOB}}</td>
+    </tr>
+</table>
+</div>

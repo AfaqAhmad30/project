@@ -1,3 +1,4 @@
+//dependencies
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
@@ -6,19 +7,19 @@ var mongoose = require('mongoose');
 var router= express.Router();
 var appRoutes= require('./app/routes/api')(router);
 var path=require('path');
-
+var alert = require('alert-node');
 
 var port = process.env.PORT || 8080;
 var url = 'mongodb://localhost:27017/projectDB';
 
-
+//middlewares
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 app.use('/api',appRoutes);
 
-
+//db connection
 mongoose.connect(url, function(err) {
     if(err) {
         console.log('Not connected to mongodb', err);
@@ -27,6 +28,7 @@ mongoose.connect(url, function(err) {
     }
 });
 
+//static path
 app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/app/views/index.html'));
 });

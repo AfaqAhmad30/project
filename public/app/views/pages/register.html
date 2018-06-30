@@ -1,0 +1,39 @@
+
+<div class="page-header">
+    <h1>SignUp</h1>
+</div> 
+<form ng-submit="register.regUser(regData);">
+        <!-- <label>User Name</label>
+        <input style="width: 30%" class="form-control" type="text" name="userName" placeholder="User Name" ng-model="register.regData.userName">
+        <br> -->
+        <label>First Name</label>
+        <input style="width: 30%" class="form-control" type="text" autocomplete="off" name="firstName" placeholder="First Name" ng-model="register.regData.firstName">
+        <br>
+        <label>Last Name</label>
+        <input style="width: 30%" class="form-control" type="text" autocomplete="off" name="lastName" placeholder="Last Name" ng-model="register.regData.lastName">
+        <br>                
+        <label>Date Of Birth</label>
+        <input type="date" name="Date Of Birth" ng-model="register.regData.DOB">
+        <br>
+        <label>Email</label>
+        <input style="width: 30%" class="form-control" type="email" name="email" placeholder="example: john@gmail.com" ng-model="register.regData.email">
+        <br>
+        <label>Password</label>
+        <input style="width: 30%" class="form-control" type="password" autocomplete="off" name="Password" placeholder="Please Eneter Your Password" ng-model="register.regData.password">
+        <br>
+        <label>Confirm Password</label>
+        <input style="width: 30%" class="form-control" type="password" autocomplete="off" name="password2" placeholder="Please Confirm Your Password" ng-model="register.regData.password2">
+        <br>
+        <div class="checkbox">
+        <label><input type="checkbox"> Remember me</label>
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+</form>
+<br>
+<div class="row show-hide-messsage" ng-show="register.successMsg">
+    <div class="alert alert-success">{{ register.successMsg }}</div>
+</div>
+<br>
+<div class="row show-hide-messsage" ng-show="register.errorMsg">
+        <div class="alert alert-danger">{{ register.errorMsg }}</div>   
+</div>

@@ -13,21 +13,26 @@
 
     <!-- Bootstrap core CSS -->
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/animate.css">
 
     <!-- Angular -->
     <script src="assets/js/angular.js"></script>
     <script src="assets/js/angular-route.js"></script>
     <script src="/app/app.js"></script>
     <script src="/app/routes.js"></script>
+    <script src="/app/controllers/userCtrls.js"></script>
+    <script src="/app/controllers/mainCtrl.js"></script>
+    <script src="/app/services/userServices.js"></script>
+    <script src="/app/services/authServices.js"></script>
     
   </head>
 
-  <body ng-app="myApp" style="background-color: #E9EBEE">
+  <body ng-app="myApp" ng-controller="mainCtrl as main" style="background-color: #E9EBEE">
 
-    <nav class="navbar navbar-expand-md navbar-light" style="background-color: rgb(188, 235, 219)">
+    <nav class="navbar navbar-expand-md navbar-light" style="background-color: rgb(64, 209, 178)">
       <div class="container">
-
-        <a class="navbar-brand" href="#">vTrans</a>
+ 
+        <a class="navbar-brand" href="/">vTrans</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -35,31 +40,46 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+              <a ng-show="main.isLoggedIn" class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/profile">Profile</a>
+              <a ng-show="main.isLoggedIn" class="nav-link" href="/profile">Profile</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/messages">Messages</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
-              <div class="dropdown-menu" aria-labelledby="dropdown01">
-                <a class="dropdown-item" href="#">Logout</a>
-                <a class="dropdown-item" href="#">Setting</a>
-                <a class="dropdown-item" href="#">Some other option</a>
-              </div>
+              <a ng-show="main.isLoggedIn" class="nav-link" href="/messages">Messages</a>
             </li>
           </ul>
           <form class="form-inline my-2 my-lg-0">
               <div class="input-group">
                 <input type="text" class="form-control" placeholder="Search" aria-label="Search">
                 <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" type="submit">Search</button>
+                  <button style="background-color: black; color: white" class="btn btn
+                  -outline-secondary" type="submit">Search</button>
                 </div>
               </div>
           </form>
+          <ul class="active nav navbar-nav navbar-right">
+            <li class="nav-item">
+              <a ng-show="!main.isLoggedIn" class="nav-link" href="/register">Register</a>
+            </li>
+            <li class="nav-item">
+              <a ng-show="!main.isLoggedIn" class="nav-link" href="/login">Login</a>
+            </li>
+            <li class="nav-item">
+              <a ng-show="main.isLoggedIn" class="nav-link" href="#" ng-click="main.logout();">Logout</a>
+            </li>
+            <li class="nav-item">
+              <a ng-show="main.isLoggedIn" class="nav-link" href="#"><strong style="text-transform: capitalize">{{ main.firstName }}</strong></a>
+            </li>
+            <!-- <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false"></a>
+              <div class="dropdown-menu" aria-labelledby="dropdown01">
+                <a class="dropdown-item" href="#">Logout</a>
+                <a class="dropdown-item" href="#">Setting</a>
+                <a class="dropdown-item" href="#">Some other option</a>
+              </div>
+            </li> -->
+          </ul>
         </div>
       </div>
     </nav>
