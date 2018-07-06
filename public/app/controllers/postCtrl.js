@@ -17,14 +17,17 @@ angular.module('postControllers', ['postsServices'])
 
 
     // When user save a new post
-    var newPost = {};
-    newPost.author = author;
     $scope.description = '';
-    $scope.myFile = '';
+    $scope.myFile ='';
+
+    var newPost = {};
+    
     $scope.addNewPost = function() {
-        console.log($scope.myFile);
+        newPost.author = author;
         newPost.description = $scope.description;
-        uploadPost.uploadIt($scope.myFile, newPost).then((result) => {
+        newPost.file = $scope.myFile;
+        console.log($scope.myFile);
+        uploadPost.uploadIt(newPost).then((result) => {
             console.log(result);
         }).catch((err) => {
             console.log(err);

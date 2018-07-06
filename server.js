@@ -1,21 +1,18 @@
-require('./app/config/config');
 
-const express = require('express');
-const app = express();
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const morgan = require('morgan');
-const router= express.Router();
-const appRoutes= require('./app/routes/api')(router);
-const path=require('path');
-
+var express = require('express');
+var app = express();
+var bodyParser = require('body-parser');
+var morgan = require('morgan');
+var mongoose = require('mongoose');
+var router= express.Router();
+var appRoutes= require('./app/routes/api')(router);
+var path=require('path');
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 app.use('/api',appRoutes);
-
 
 mongoose.connect(process.env.MONGODB_URI);
 
