@@ -39,7 +39,7 @@ module.exports = function(router) {
 
     //user Login Route
     router.post('/authenticate', function(req, res){
-        user.findOne({ email: req.body.email }). select('firstName email password').exec(function(err,user)
+        user.findOne({ email: req.body.email }).select('_id firstName lastName email password').exec(function(err,user)
         {
             if(err) throw err;
 
@@ -56,8 +56,9 @@ module.exports = function(router) {
                 } else {
                     var token = jwt.sign({
                         firstName: user.firstName,
+                        lastName: user.lastName,
                         email: user.email,
-                        id: user._id
+                        _id: user._id
                     }, secret, {expiresIn: '24h'});
                     console.log(user.email);
                     res.json({success: true, message: 'user Authenticated successfully', token: token})
@@ -67,7 +68,7 @@ module.exports = function(router) {
     });
 
     // Adding new post to user timeline
-    router.post('/posts', upload.single('file'), (req, res) => {
+    router.post('/newPost', upload.single('file'), (req, res) => {
         var post = new Post();
         post.author = req.body.author;
         post.media = req.body.media;
@@ -83,8 +84,8 @@ module.exports = function(router) {
 
 
     // Get all post to timeline
-    router.get('/posts', (req, res) => {
-        Post.find({}).populate('author', 'fullName').sort({time: -1}).exec().then((posts) => {
+    router.post('/posts', (req, res) => {
+        Post.find({author: req.body.author}).populate('author', 'firstName lastName').sort({time: -1}).exec().then((posts) => {
             res.json(posts);
         }).catch((err) => {
             res.json(err);
@@ -113,5 +114,15 @@ module.exports = function(router) {
         res.send(req.decoded);
     });
     
+    // Get user profile details
+    router.post('/getProfileDetails', function(req, res) {
+        user.findById({_id: req.body.userProfileId}).then(function(result) {
+            res.json(result);
+        }).catch((err) => {
+            res.json(err);
+        });
+    });
+
+
     return router;
 };

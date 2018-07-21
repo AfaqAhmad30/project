@@ -13,14 +13,15 @@ angular.module('appRoutes',['ngRoute'])
         access: {restricted: true}
     })
 
+    .when('/profile/:userId', {
+        templateUrl: 'app/views/pages/profile.html'
+    })
+
     .when('/messages', {
         templateUrl: 'app/views/pages/messages.html'
 
     })
-    .when('/auth',{
-        templateUrl:'app/views/pages/auth.html'
-        
-    })
+    
     .when('/register',{
         templateUrl:'app/views/pages/register.html',
         controller: 'regCtrl',
@@ -32,10 +33,7 @@ angular.module('appRoutes',['ngRoute'])
         templateUrl:'app/views/pages/login.html',
         access: {restricted: false}
     })
-    .when('/logout',{
-        templateUrl:'app/views/pages/logout.html'
-        
-    })
+
     .otherwise({ redirectTo: '/' });
 
     $locationProvider.html5Mode({

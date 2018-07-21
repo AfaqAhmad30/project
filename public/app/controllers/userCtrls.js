@@ -1,6 +1,6 @@
 angular.module('userControllers', ['userServices'])
 
-.controller('regCtrl', function($http, $location, $timeout, user){
+.controller('regCtrl', function($location, $timeout, user){
     var app = this;
     this.regUser = function(regData){
         app.errorMsg = false;

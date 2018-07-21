@@ -5,15 +5,16 @@
         if(auth.isLoggedIn()) {
             console.log('Success: user is logged in!');
                 app.isLoggedIn = true;
-            auth.getUser().then(function(data) {
-                app.firstName = data.data.firstName;
-                app.lastName = data.data.lastName;
-                app.email = data.data.email;
-                app.DOB = data.data.DOB;
-                if(location.href == 'http://localhost:8080/login' || location.href == 'http://localhost:8080/register'){
-                $location.path('/')
-                }
-            });
+                auth.getUser().then(function(data) {
+                    app.firstName = data.data.firstName;
+                    app.lastName = data.data.lastName;
+                    app.email = data.data.email;
+                    app.DOB = data.data.DOB;
+                    app._id = data.data._id;
+                    if(location.href == 'http://localhost:8080/login' || location.href == 'http://localhost:8080/register'){
+                    $location.path('/')
+                    }
+                });
         } else {
             console.log('Failure: user is not logged in!');
             app.isLoggedIn= false;
@@ -45,6 +46,8 @@
 
     this.logout = function(){
         auth.logout();
-        $location.path('/');  
+        $timeout(function() {
+            $location.path('/login');
+        }, 2000);
     };
 });

@@ -24,12 +24,16 @@
     <script src="/assets/js/angular-route.js"></script>
     <script src="/app/app.js"></script>
     <script src="/app/routes.js"></script>
-    <script src="/app/services/fileServices.js"></script>
+    <script src="/app/services/postServices.js"></script>
+    <script src="/app/controllers/profileCtrl.js"></script>
     <script src="/app/controllers/postCtrl.js"></script>
     <script src="/app/controllers/userCtrls.js"></script>
     <script src="/app/controllers/mainCtrl.js"></script>
     <script src="/app/services/userServices.js"></script>
     <script src="/app/services/authServices.js"></script>
+
+    <!-- moment js file for timestamp -->
+    <script src="/assets/js/moment.js"></script>
     
   </head>
 
@@ -46,10 +50,10 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a ng-show="main.isLoggedIn" class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+              <a ng-show="main.isLoggedIn" class="nav-link" href="/">Home</a>
             </li>
             <li class="nav-item">
-              <a ng-show="main.isLoggedIn" class="nav-link" href="/profile">Profile</a>
+              <a ng-show="main.isLoggedIn" class="nav-link" href="/profile/{{ main._id }}">{{ main.firstName }}</a>
             </li>
             <li class="nav-item">
               <a ng-show="main.isLoggedIn" class="nav-link" href="/messages">Messages</a>

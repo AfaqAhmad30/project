@@ -1,56 +1,72 @@
-<div>
+<div ng-controller="profileCtrl">
     <div>
-        <img src="#" alt="cover photo">
-    </div>
-    <div>
-        <div>
-            <img src="#" alt="profile photo">
+        <div style="width: 100%; height: 350px;">
+            <img src="/assets/cover.jpg" alt="cover photo" style="width: 100%; height: 100%;">
         </div>
-        <ul>
-            <li>
-                <a href="#">Post</a>
-            </li>
-            <li>
-                <a href="#">Following</a>
-            </li>
-            <li>
-                <a href="#">Followers</a>
-            </li>
-            <li>
-                <a href="#">Media</a>
-            </li>
-            <li>
-                <a href="#">Edit Profile</a>
-            </li>
-        </ul>
+        <div class="row" style="height: 80px;">
+            <div class="col-sm-3">
+                <img src="/assets/no-profile.jpg" alt="profile photo" style="width: 230px; border-radius: 50%;">
+            </div>
+            <ul class="nav col-sm-6">
+                <li class="nav-link">
+                    <a href="#">Posts</a>
+                </li>
+                <li class="nav-link">
+                    <a href="#">About</a>
+                </li>
+                <li class="nav-link">
+                    <a href="#">Friends</a>
+                </li>
+                <li class="nav-link">
+                    <a href="#">Photos</a>
+                </li>
+                <li class="nav-link">
+                    <a href="#">Others</a>
+                </li>
+                <li class="nav-link">
+                    <a href="#">Edit Profile</a>
+                </li>
+            </ul>
+        </div>
     </div>
-</div>
 
-<div>
-    <div>
-        <h6>Saleh Banoori</h6>
-        <ul>
-            <li>Bio</li>
-            <li>From</li>
-            <li>DOB</li>
-            <li>Joined</li>
-        </ul>
-    </div>
-    <div ng-controller="postCtrl">
-        <div>
-            <form enctype="multipart/form-data">
-                <input type="text" ng-model="description" placeholder="Write something!">
-                <input type = "file" file-model = "myFile" name="file"/>
-                <button ng-click = "addNewPost()">Post</button>
-            </form>
+    <div class="row">
+        <div class="col-sm-3">
+            <h6>{{ userDetails.firstName + ' ' + userDetails.lastName}}</h6>
+            <ul>
+                <li>Bio</li>
+                <li>From</li>
+                <li>DOB</li>
+                <li>Joined</li>
+            </ul>
         </div>
-        <br>
-        <div>
-            <div ng-repeat="post in posts">
-                <h6>{{ post.author.fullName }}</h6>
-                <p><small>{{ post.time }}</small></p>
-                <p>{{ post.description }}</p>
-                <hr>
+        <div class="col-sm-6" ng-controller="postCtrl">
+            <div>
+                <form enctype="multipart/form-data">
+                    <input type="text" ng-model="description" placeholder="Write something!">
+                    <input type = "file" file-model = "myFile" name="file"/>
+                    <button ng-click = "addNewPost()">Post</button>
+                </form>
+            </div>
+            <br>
+            <div>
+                <div ng-repeat="post in posts" style="background-color: white;">
+                    <div class="row">
+                        <div class="col-2">
+                            <img src="assets/no-profile.jpg" alt="profile avatar" style="height: 50px; border-radius: 50%;">
+                        </div>
+                        <div>
+                            <h6>{{ post.author.firstName + ' ' + post.author.lastName}}</h6>
+                            <p><small>{{ post.time }}</small></p>
+                        </div>
+                    </div>
+                    <p>{{ post.description }}</p>
+                    <div class="row">
+                        <a href="#"><img src="#" alt="like"></a>
+                        <a href="#"><img src="#" alt="comment"></a>
+                    </div>
+                    <hr>
+                </div>
             </div>
         </div>
     </div>
