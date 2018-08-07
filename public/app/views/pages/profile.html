@@ -1,45 +1,53 @@
 <div ng-controller="profileCtrl">
-    <div>
-        <div style="width: 100%; height: 350px;">
-            <img src="/assets/cover.jpg" alt="cover photo" style="width: 100%; height: 100%;">
+    
+    <!-- Profile header having cover, dp and nav -->
+    <div>    
+        <!-- cover photo -->
+        <div id="p-cover-div">
+            <img src="/assets/cover.jpg" alt="cover photo">
         </div>
-        <div class="row" style="height: 80px;">
-            <div class="col-sm-3">
-                <img src="/assets/no-profile.jpg" alt="profile photo" style="width: 230px; border-radius: 50%;">
+
+        <!-- nav bar with profile photo on left side -->
+        <div id="p-nav" class="row mx-0">
+            <div id="p-dp-div" class="col-sm-3">
+                <img src="/assets/no-profile.jpg" alt="profile photo" class="rounded-circle">
             </div>
             <ul class="nav col-sm-6">
-                <li class="nav-link">
-                    <a href="#">Posts</a>
+                <li class="nav-link" style="border-bottom: 2px solid #5CC4BB;">
+                    <a href="/profile/{{ main._id }}">Timeline</a>
                 </li>
                 <li class="nav-link">
-                    <a href="#">About</a>
+                    <a href="/profile/{{ main._id }}/about">About</a>
                 </li>
                 <li class="nav-link">
-                    <a href="#">Friends</a>
+                    <a href="/profile/{{ main._id }}/friends">Friends</a>
                 </li>
                 <li class="nav-link">
-                    <a href="#">Photos</a>
+                    <a href="/profile/{{ main._id }}/photos">Photos</a>
                 </li>
                 <li class="nav-link">
                     <a href="#">Others</a>
                 </li>
-                <li class="nav-link">
+            </ul>
+            <ul class="nav col-sm-3">
+                <li class="nav-link align-middle">
                     <a href="#">Edit Profile</a>
                 </li>
             </ul>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-sm-3">
-            <h6>{{ userDetails.firstName + ' ' + userDetails.lastName}}</h6>
+    <div id="p-main-body" class="row mx-0">
+        <div id="p-user-details" class="col-sm-3">
+            <h5>{{ userDetails.firstName + ' ' + userDetails.lastName }}</h5>
             <ul>
                 <li>Bio</li>
                 <li>From</li>
-                <li>DOB</li>
+                <li>DOB {{ userDetails.DOB }}</li>
                 <li>Joined</li>
             </ul>
         </div>
+
         <div class="col-sm-6" ng-controller="postCtrl">
             <div>
                 <form enctype="multipart/form-data">
@@ -47,23 +55,52 @@
                     <input type = "file" file-model = "myFile" name="file"/>
                     <button ng-click = "addNewPost()">Post</button>
                 </form>
+
+
+                <!-- <form name="up.upload_form">
+                    Single Image with validations
+                    <input 
+                        type="file" 
+                        ngf-select 
+                        ng-model="up.file" 
+                        name="file" 
+                        ngf-pattern="'image/*'"
+                        accept="image/*" 
+                        ngf-max-size="20MB" 
+                    />
+
+                    Image thumbnail: <img style="width:100px;" ngf-thumbnail="up.file || '/thumb.jpg'"/>
+                    <i ng-show="up.upload_form.file.$error.required">*required</i>
+                    <br>
+                    <i ng-show="up.upload_form.file.$error.maxSize">
+                        File too large {{up.file.size / 1000000|number:1}}MB: max 20M
+                    </i>
+                    <button type="submit" ng-click="up.submit()">submit</button>
+                    <p>{{up.progress}}</p>
+                </form> -->
+
+
             </div>
             <br>
             <div>
-                <div ng-repeat="post in posts" style="background-color: white;">
-                    <div class="row">
+                <div ng-repeat="post in posts" style="background-color: white;" class="rounded">
+                    <div class="row" style="padding: 10px;">
                         <div class="col-2">
-                            <img src="assets/no-profile.jpg" alt="profile avatar" style="height: 50px; border-radius: 50%;">
+                            <img src="assets/no-profile.jpg" alt="profile avatar" style="margin-left: 10px; height: 50px;" class="rounded-circle">
                         </div>
                         <div>
-                            <h6>{{ post.author.firstName + ' ' + post.author.lastName}}</h6>
-                            <p><small>{{ post.time }}</small></p>
+                            <div>
+                                <h6>{{ post.author.firstName + ' ' + post.author.lastName}}</h6>
+                                <p><small>{{ post.time }}</small></p>
+                            </div>
+                            <div>
+                                <p>{{ post.description }}</p>
+                                <div>
+                                    <a href="#" class="post-actions"><img src="#" alt="like"></a>
+                                    <a href="#" class="post-actions"><img src="#" alt="comment"></a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <p>{{ post.description }}</p>
-                    <div class="row">
-                        <a href="#"><img src="#" alt="like"></a>
-                        <a href="#"><img src="#" alt="comment"></a>
                     </div>
                     <hr>
                 </div>

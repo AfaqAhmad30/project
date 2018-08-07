@@ -16,8 +16,7 @@ var postSchema = Schema({
         type: String
     },
     media: [{
-        type: Schema.Types.ObjectId,
-        default: []
+        type: String
     }],
     likes: {
         type: Number,

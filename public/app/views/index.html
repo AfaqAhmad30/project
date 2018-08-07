@@ -19,11 +19,20 @@
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/animate.css">
 
-    <!-- Angular -->
+    <!-- Angularjs -->
     <script src="/assets/js/angular.js"></script>
     <script src="/assets/js/angular-route.js"></script>
+    <script src="/assets/js/angular-ui-router.js"></script>
+
+    <!-- ng-file-upload -->
+    <script src="/assets/js/ng-file-upload-shim.min.js"></script> <!-- for no html5 browsers support -->
+    <script src="/assets/js/ng-file-upload.min.js"></script>    
+
+    <!-- Angularjs app and its routes -->
     <script src="/app/app.js"></script>
     <script src="/app/routes.js"></script>
+
+    <!-- Angularjs Services and Controllers -->
     <script src="/app/services/postServices.js"></script>
     <script src="/app/controllers/profileCtrl.js"></script>
     <script src="/app/controllers/postCtrl.js"></script>
@@ -37,9 +46,9 @@
     
   </head>
 
-  <body ng-app="myApp" ng-controller="mainCtrl as main" style="background-color: #E9EBEE">
+  <body ng-app="myApp" ng-controller="mainCtrl as main" style="background-color: #E6ECF0">
 
-    <nav class="navbar navbar-expand-md navbar-light" style="background-color: #68CCC4;">
+    <nav class="navbar navbar-expand-md navbar-light" style="background-color: #ffffff; height: 45px;">
       <div class="container">
  
         <a class="navbar-brand" href="/">vTrans</a>
@@ -63,8 +72,7 @@
               <div class="input-group">
                 <input type="text" class="form-control" placeholder="Search" aria-label="Search">
                 <div class="input-group-append">
-                  <button style="background-color: black; color: white" class="btn btn
-                  -outline-secondary" type="submit">Search</button>
+                  <button class="btn btn-outline-secondary" type="submit">Search</button>
                 </div>
               </div>
           </form>
@@ -76,7 +84,7 @@
               <a ng-show="!main.isLoggedIn" class="nav-link" href="/login">Login</a>
             </li>
             <li class="nav-item">
-              <a ng-show="main.isLoggedIn" class="nav-link" href="#" ng-click="main.logout();">Logout</a>
+              <a ng-show="main.isLoggedIn" class="nav-link" href="#" ng-click="main.logout()">Logout</a>
             </li>
             <li class="nav-item">
               <a ng-show="main.isLoggedIn" class="nav-link" href="#"><strong style="text-transform: capitalize">{{ main.firstName }}</strong></a>

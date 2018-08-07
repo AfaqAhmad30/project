@@ -1,6 +1,5 @@
 
 var {Post} = require('../models/post');
-var {upload} = require('../../app/config/GridFS');
 
 var user = require('../models/users');
 var jwt  = require('jsonwebtoken');
@@ -60,7 +59,6 @@ module.exports = function(router) {
                         email: user.email,
                         _id: user._id
                     }, secret, {expiresIn: '24h'});
-                    console.log(user.email);
                     res.json({success: true, message: 'user Authenticated successfully', token: token})
                 }
             }
@@ -68,10 +66,10 @@ module.exports = function(router) {
     });
 
     // Adding new post to user timeline
-    router.post('/newPost', upload.single('file'), (req, res) => {
+    router.post('/newPost', (req, res) => {
         var post = new Post();
         post.author = req.body.author;
-        post.media = req.body.media;
+        // post.media = req.body.media;
         post.time = new Date().getTime();
         post.description = req.body.description;
         
