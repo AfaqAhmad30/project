@@ -15,9 +15,10 @@ var postSchema = Schema({
     description: {
         type: String
     },
-    media: [{
-        type: String
-    }],
+    media: {
+        filename: String,
+        path: String
+    },
     likes: {
         type: Number,
         default: 0
