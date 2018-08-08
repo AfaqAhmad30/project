@@ -65,7 +65,9 @@ angular.module('appRoutes',['ngRoute', 'ui.router'])
         })
         .when('/messages', {
             templateUrl: 'app/views/pages/messages.html'
-
+        })
+        .when('/search', {
+            templateUrl: 'app/views/pages/searcUsers.html'
         })
         .otherwise({ redirectTo: '/' });
 

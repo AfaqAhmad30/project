@@ -120,7 +120,14 @@ module.exports = function(router) {
             res.json(err);
         });
     });
-
+    //Search Users
+    router.post('/search', function(req, res){
+        user.find({ firstName:{ $regex: req.body.firstName, $options: 'i' }}).exec().then((result) => {
+            res.json(result);
+        }, (err) => {
+            res.json(err);
+        });
+    });
 
     return router;
 };

@@ -1,0 +1,30 @@
+<div> 
+    <h1 style="text-transform: capitalize">Searched Users</h1>
+</div>
+<div class="panel panel-info">
+    <div class="panel-heading" style="text-align: center; background: dodgerblue"><strong style="text-transform: capitalize">Matched Users</strong></div>
+    <div>
+        <h4><strong>Searched users by First Name</strong></h4>
+        <br>
+    </div>
+    <div ng-repeat="user in main.searchedData">
+        <div>
+            <div class="col-2">
+            <img src="assets/no-profile.jpg" alt="profile avatar" style="margin-left: 10px; height: 40px;" class="rounded-circle">
+            <a style="margin-left: 10px;" href="/profile/{{user._id}}"> {{ user.firstName }}</a>
+                <div>
+                    
+                </div>
+            </div>
+        </div>
+            <div class="col-2">
+            <text style="margin-left: 60px;"><strong>Kohat,Pakistan</strong></text>
+            <div>
+                <button style="margin-left: 60px;" type="submit">Add</button>
+                <button style="margin-left: 10px;" type="submit">Message</button>  
+            </div>
+            </div>
+        </div>
+        <br>
+    </div>
+</div>

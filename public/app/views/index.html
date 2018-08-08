@@ -70,9 +70,9 @@
           </ul>
           <form class="form-inline my-2 my-lg-0">
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search" aria-label="Search">
+                <input type="text"  class="form-control" ng-model="main.searchValue" placeholder="Search" aria-label="Search">
                 <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" type="submit">Search</button>
+                  <button ng-click="main.searchUser()" class="btn btn-outline-secondary" type="submit"><a href="/search">Search</a></button>
                 </div>
               </div>
           </form>
