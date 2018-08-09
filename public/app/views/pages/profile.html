@@ -50,38 +50,16 @@
 
         <div class="col-sm-6" ng-controller="postCtrl">
             <div>
-                <form enctype="multipart/form-data">
-                    <input type="text" ng-model="description" placeholder="Write something!">
-                    <input type = "file" file-model = "myFile" name="file"/>
-                    <button ng-click = "addNewPost()">Post</button>
+                <form name="form" enctype="multipart/form-data">
+                    <input type="text" ng-model="newPost.description" placeholder="Write Something...">
+                    <div class="button" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
+                        ngf-accept="'image/*'"><a href="">Select File</a></div>
+                    <button type="submit" ng-click="submit()">Post</button>
                 </form>
-
-
-                <!-- <form name="up.upload_form">
-                    Single Image with validations
-                    <input 
-                        type="file" 
-                        ngf-select 
-                        ng-model="up.file" 
-                        name="file" 
-                        ngf-pattern="'image/*'"
-                        accept="image/*" 
-                        ngf-max-size="20MB" 
-                    />
-
-                    Image thumbnail: <img style="width:100px;" ngf-thumbnail="up.file || '/thumb.jpg'"/>
-                    <i ng-show="up.upload_form.file.$error.required">*required</i>
-                    <br>
-                    <i ng-show="up.upload_form.file.$error.maxSize">
-                        File too large {{up.file.size / 1000000|number:1}}MB: max 20M
-                    </i>
-                    <button type="submit" ng-click="up.submit()">submit</button>
-                    <p>{{up.progress}}</p>
-                </form> -->
-
-
             </div>
+            
             <br>
+
             <div>
                 <div ng-repeat="post in posts" style="background-color: white;" class="rounded">
                     <div class="row" style="padding: 10px;">
@@ -95,6 +73,7 @@
                             </div>
                             <div>
                                 <p>{{ post.description }}</p>
+                                <img ng-src="{{ post.media.path || '../../media/file-1533633749152.jpg'}}">
                                 <div>
                                     <a href="#" class="post-actions"><img src="#" alt="like"></a>
                                     <a href="#" class="post-actions"><img src="#" alt="comment"></a>

@@ -50,6 +50,7 @@
             $location.path('/login');
         }, 2000);
     };
+
     this.searchValue = '';
     this.searchedData = [];
 
@@ -63,5 +64,15 @@
             console.log(err);
         })
     }
-
+    this.follow = function(followerId,FollowingId){
+        $http.post('/api/follow', {
+            follower: followerId,
+            following: FollowingId
+        }).then((result) => {
+            // kam idar krna hai
+            console.log(result);
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
 });

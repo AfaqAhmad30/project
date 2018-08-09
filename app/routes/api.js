@@ -1,9 +1,24 @@
 
 var {Post} = require('../models/post');
+var multer = require('multer');
 
 var user = require('../models/users');
-var jwt  = require('jsonwebtoken');
+var jwt  =    require('jsonwebtoken');
 var secret = 'mySecret';
+var follow = require('../models/follow');
+
+// Multer disk storage settings
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './app/media')
+    },
+    filename: function (req, file, cb) {
+        var datetimestamp = Date.now();
+        cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1])
+    }
+});
+var upload = multer({ storage: storage });
+
 
 module.exports = function(router) {
     // All the routes will define here...
@@ -66,12 +81,13 @@ module.exports = function(router) {
     });
 
     // Adding new post to user timeline
-    router.post('/newPost', (req, res) => {
+    router.post('/newPost', upload.single('file'), (req, res) => {
         var post = new Post();
-        post.author = req.body.author;
-        // post.media = req.body.media;
+        post.author = req.body.newPost.author;
+        post.media.filename = req.file.filename;
+        post.media.path = req.file.path;
         post.time = new Date().getTime();
-        post.description = req.body.description;
+        post.description = req.body.newPost.description;
         
         post.save().then((result) => {
             res.json(result);
@@ -125,6 +141,17 @@ module.exports = function(router) {
         user.find({ firstName:{ $regex: req.body.firstName, $options: 'i' }}).exec().then((result) => {
             res.json(result);
         }, (err) => {
+            res.json(err);
+        });
+    });
+
+    router.post('/follow', function(req,res){
+        var fol = new follow();
+        fol.follower = req.body.follower;
+        fol.following = req.body.following;
+        fol.save().then((result) => {
+            res.json(result);
+        }).catch((err) => {
             res.json(err);
         });
     });
