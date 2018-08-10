@@ -3,9 +3,9 @@ var {Post} = require('../models/post');
 var multer = require('multer');
 
 var user = require('../models/users');
-var jwt  = require('jsonwebtoken');
+var jwt  =    require('jsonwebtoken');
 var secret = 'mySecret';
-
+var follow = require('../models/follow');
 
 // Multer disk storage settings
 var storage = multer.diskStorage({
@@ -136,7 +136,25 @@ module.exports = function(router) {
             res.json(err);
         });
     });
+    //Search Users
+    router.post('/search', function(req, res){
+        user.find({ firstName:{ $regex: req.body.firstName, $options: 'i' }}).exec().then((result) => {
+            res.json(result);
+        }, (err) => {
+            res.json(err);
+        });
+    });
 
+    router.post('/follow', function(req,res){
+        var fol = new follow();
+        fol.follower = req.body.follower;
+        fol.following = req.body.following;
+        fol.save().then((result) => {
+            res.json(result);
+        }).catch((err) => {
+            res.json(err);
+        });
+    });
 
     return router;
 };

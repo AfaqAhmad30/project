@@ -1,5 +1,5 @@
  angular.module('mainController', ['authServices'])
-.controller('mainCtrl', function(auth, $timeout, $location, $rootScope){
+.controller('mainCtrl', function(auth, $timeout, $location, $rootScope, $http){
     var app = this;
     $rootScope.$on('$routeChangeStart', function() {
         if(auth.isLoggedIn()) {
@@ -50,4 +50,29 @@
             $location.path('/login');
         }, 2000);
     };
+
+    this.searchValue = '';
+    this.searchedData = [];
+
+    this.searchUser = function() {
+        $http.post('/api/search', {
+            firstName: this.searchValue
+        }).then((result) => {
+            this.searchedData = result.data;
+            console.log(this.searchedData)
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+    this.follow = function(followerId,FollowingId){
+        $http.post('/api/follow', {
+            follower: followerId,
+            following: FollowingId
+        }).then((result) => {
+            // kam idar krna hai
+            console.log(result);
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
 });
