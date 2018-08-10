@@ -1,23 +1,63 @@
 
-<div class="page-header">
-    <h1>Login</h1>
-</div> 
-<form ng-submit="main.doLogin(loginData);">
-    <div style="align-content: center">
-        <label>email</label>
-        <input style="width: 30%" class="form-control" type="email" autocomplete="off" name="User Name" placeholder="User Email" ng-model="main.loginData.email">
-        <br>
-        <label>Password</label>
-        <input style="width: 30%" class="form-control" type="password" autocomplete="off" name="Password" placeholder="Enter Your Password" ng-model="main.loginData.password">
-        <br>
-        <button type="submit" class="btn btn-default">Login</button>  
-</div>  
-</form>
-<br>
-<div class="row show-hide-messsage" ng-show="main.successMsg">
-    <div class="alert alert-success">{{ main.successMsg }}</div>
+<!-- main -->
+
+<div class="center-container">
+	<!--header-->
+	<div class="header-w3l">
+		
+	</div>
+	<!--//header-->
+	<div class="main-content-agile">
+		<div class="l-sub-main-w3">	
+			<div class="wthree-pro">
+				<h2> vTrance</h2>
+			</div>
+			<form  ng-submit="main.doLogin(loginData);">
+                
+                <div class="pom-agile">
+					<input placeholder="E-mail" class="form-control" type="email" autocomplete="off" name="User Name" placeholder="User Email" ng-model="main.loginData.email">
+					<span class="icon1"><i class="fa fa-user" aria-hidden="true"></i></span>
+                </div>
+                <br>
+                
+                <div class="pom-agile">
+					<input  placeholder="Password"class="form-control" type="password" autocomplete="off" name="Password" placeholder="Enter Your Password" ng-model="main.loginData.password" required="">
+					<span class="icon2"><i class="fa fa-unlock" aria-hidden="true"></i></span>
+                </div>
+                <br>
+                <h6><a href="#" style="color:whitesmoke; font-weight: bold">Forgot Password?</a></h6>
+				<div class="sub-w3l">
+					
+					<div class="right-w3l" >
+						<input id="btn1" type="submit" value="Login" data-toggle="modal">
+					</div>
+                </div>
+                <br>
+                <h6 class="register"><a href="/register"  style=" font-weight: bold;  ">Create Account</a></h6>
+                
+            </form>
+           
+
+                <div class="alert alert-success alert-dismissible" ng-show="main.successMsg">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Success!</strong> {{ main.sucessMsg }}
+                      </div>
+
+                <div class="alert alert-danger alert-dismissible" ng-show="main.errorMsg">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Error!</strong> {{ main.errorMsg }}
+                      </div>
+              
+        </div>
+        
+    </div>
+    
+	<!--//main-->
+	<!--footer-->
+	<div class="footer">
+        
+		<p>&copy; 2018. All rights reserved | Design by Syed Nomi</p>
+	</div>
+	<!--//footer-->
 </div>
-<br>
-<div class="row show-hide-messsage" ng-show="main.errorMsg">
-        <div class="alert alert-danger">{{ main.errorMsg }}</div>   
 </div>

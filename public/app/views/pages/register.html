@@ -1,39 +1,87 @@
 
-<div class="page-header">
-    <h1>SignUp</h1>
-</div> 
-<form ng-submit="register.regUser(regData);">
-        <!-- <label>User Name</label>
-        <input style="width: 30%" class="form-control" type="text" name="userName" placeholder="User Name" ng-model="register.regData.userName">
-        <br> -->
-        <label>First Name</label>
-        <input style="width: 30%" class="form-control" type="text" autocomplete="off" name="firstName" placeholder="First Name" ng-model="register.regData.firstName">
-        <br>
-        <label>Last Name</label>
-        <input style="width: 30%" class="form-control" type="text" autocomplete="off" name="lastName" placeholder="Last Name" ng-model="register.regData.lastName">
-        <br>                
-        <label>Date Of Birth</label>
-        <input type="date" name="Date Of Birth" ng-model="register.regData.DOB">
-        <br>
-        <label>Email</label>
-        <input style="width: 30%" class="form-control" type="email" name="email" placeholder="example: john@gmail.com" ng-model="register.regData.email">
-        <br>
-        <label>Password</label>
-        <input style="width: 30%" class="form-control" type="password" autocomplete="off" name="Password" placeholder="Please Eneter Your Password" ng-model="register.regData.password">
-        <br>
-        <label>Confirm Password</label>
-        <input style="width: 30%" class="form-control" type="password" autocomplete="off" name="password2" placeholder="Please Confirm Your Password" ng-model="register.regData.password2">
-        <br>
-        <div class="checkbox">
-        <label><input type="checkbox"> Remember me</label>
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-</form>
-<br>
-<div class="row show-hide-messsage" ng-show="register.successMsg">
-    <div class="alert alert-success">{{ register.successMsg }}</div>
+<div class="center-container">
+	<!--header-->
+	<div class="header-w3l">
+		<!-- <h2> vTrance</h2> -->
+	</div>
+	<!--//header-->
+	<div class="main-content-agile">
+		<div class="sub-main-w3">	
+			<div class="wthree-pro">
+				<h2>SignUp</h2>
+			</div>
+			<form ng-submit="register.regUser(regData);">
+                
+             <div class="pom-agile">
+                        
+                        <input  class="form-control" type="text" autocomplete="off" name="firstName" placeholder="First Name" ng-model="register.regData.firstName">
+                        <span class="icon1"><i class="fa fa-user" aria-hidden="true"></i></span>
+					     
+                </div>
+                <br>
+                <div class="pom-agile">
+                       
+                        <input  class="form-control" type="text" autocomplete="off" name="lastName" placeholder="Last Name" ng-model="register.regData.lastName">
+                        <span class="icon1"><i class="fa fa-user" aria-hidden="true"></i></span>
+                </div>
+               <br>
+                <div class="pom-agile">
+
+                        <input type="date" name="Date Of Birth" placeholder="Date Of Birth" ng-model="register.regData.DOB">
+                        <span class="icon1"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                </div>
+                <br>
+                <div class="pom-agile">
+                        
+                        <input  class="form-control" type="email" name="email" placeholder="example: john@gmail.com" ng-model="register.regData.email">
+                        <span class="icon1"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+
+                </div>
+                <br>
+                <div class="pom-agile">
+
+                       
+                        <input class="form-control" type="password" autocomplete="off" name="Password" placeholder="Please Eneter Your Password" ng-model="register.regData.password">
+                        <span class="icon2"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                        
+                </div>
+                <br>
+                <div class="pom-agile">
+
+                        <input class="form-control" type="password" autocomplete="off" name="password2" placeholder="Please Confirm Your Password" ng-model="register.regData.password2">
+                        <span class="icon2"><i class="fa fa-lock" aria-hidden="true"></i></span>
+
+
+                </div>
+                
+               
+		<div class="sub-w3l">
+					
+			<div class="right-w3l" >
+                        <input id="btn1" type="submit" value="Submit">
+                        
+			</div>
+                </div>
+                
+                </form>
+
+                <div class="alert alert-success alert-dismissible mt-2"  ng-show="register.successMsg">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Sucess!</strong> {{ register.successMsg }}
+                </div>
+
+                <div class="alert alert-danger alert-dismissible mt-2" ng-show="register.errorMsg">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Error!</strong> {{ register.errorMsg }}
+                </div>
+                                     
+		</div>
+	</div>
+	<!--//main-->
+	<!--footer-->
+	<div class="footer">
+		<p>&copy; 2018. All rights reserved | Design by Syed Nomi</p>
+	</div>
+	<!--//footer-->
 </div>
-<br>
-<div class="row show-hide-messsage" ng-show="register.errorMsg">
-        <div class="alert alert-danger">{{ register.errorMsg }}</div>   
 </div>
