@@ -12,6 +12,9 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/assets/css/home.css">
     <link rel="stylesheet" href="/assets/css/profile.css">
+    <link rel="stylesheet" href="/assets/css/login.css">
+    <link rel="stylesheet" href="/assets/css/font-awesome.css">
+    <link rel="stylesheet" href="/assets/css/register.css">
 
     <title>vTrans</title>
 
@@ -48,7 +51,7 @@
 
   <body ng-app="myApp" ng-controller="mainCtrl as main" style="background-color: #E6ECF0">
 
-    <nav class="navbar navbar-expand-md navbar-light" style="background-color: #ffffff; height: 45px;">
+    <nav ng-show="main.isLoggedIn" class="navbar navbar-expand-md navbar-light" style="background-color: #ffffff; height: 45px;">
       <div class="container">
  
         <a class="navbar-brand" href="/">vTrans</a>
