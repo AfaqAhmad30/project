@@ -5,12 +5,13 @@ var multer = require('multer');
 var user = require('../models/users');
 var jwt  =    require('jsonwebtoken');
 var secret = 'mySecret';
-var follow = require('../models/follow');
+var {Follow} = require('../models/follow');
+var {Like} = require('../models/like');
 
 // Multer disk storage settings
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, './app/media')
+        cb(null, './public/media')
     },
     filename: function (req, file, cb) {
         var datetimestamp = Date.now();
@@ -145,11 +146,24 @@ module.exports = function(router) {
         });
     });
 
+    // User follow someone
     router.post('/follow', function(req,res){
-        var fol = new follow();
-        fol.follower = req.body.follower;
-        fol.following = req.body.following;
-        fol.save().then((result) => {
+        var follow = new Follow();
+        follow.follower = req.body.follower;
+        follow.followed = req.body.followed;
+        follow.save().then((result) => {
+            res.json(result);
+        }).catch((err) => {
+            res.json(err);
+        });
+    });
+
+    // User like a post
+    router.post('/postLiked', (req, res) => {
+        var like = new Like();
+        like.postId = req.body.postId;
+        like.userId = req.body.userId;
+        like.save().then((result) => {
             res.json(result);
         }).catch((err) => {
             res.json(err);

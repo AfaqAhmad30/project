@@ -2,13 +2,18 @@ var mongoose = require('mongoose');
 var Schema =   mongoose.Schema;
 
 var followSchema = new Schema({
-
-follower:   {   type: Schema.Types.ObjectId,
-                ref: 'user'
-            },
-following:  {   type: Schema.Types.ObjectId,
-                ref: 'user'
-            }         
+    follower : {
+        type: Schema.Types.ObjectId,
+        ref: 'user'
+    },
+    followed : {
+        type: Schema.Types.ObjectId,
+        ref: 'user'
+    }  
 });
 
-module.exports =  mongoose.model('follow', followSchema);
+//followSchema.index({'follower': 1, 'followed': 1}, {'unique': true});
+
+var Follow =  mongoose.model('follow', followSchema);
+
+module.exports = {Follow};

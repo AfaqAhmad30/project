@@ -36,3 +36,7 @@ div {
 #p-user-details {
     margin-top: 20px;
 }
+
+#p-like-icon :hover{
+    src: url(../images/like/like-hover.png);
+}

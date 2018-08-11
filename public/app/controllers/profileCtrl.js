@@ -10,7 +10,6 @@ angular.module('profileControllers', [])
     $http.post('/api/getProfileDetails', data).then((result) => {
         $scope.userDetails = result.data;
         $scope.userDetails.DOB = monthNames[new Date(result.data.DOB).getMonth()] + ' ' + new Date(result.data.DOB).getDate() + ', ' + new Date(result.data.DOB).getFullYear();
-        
     }).catch((err) => {
         console.log(err);
     });

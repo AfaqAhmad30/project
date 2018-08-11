@@ -64,12 +64,13 @@
             console.log(err);
         })
     }
-    this.follow = function(followerId,FollowingId){
+    this.follow = function(followerId,FollowedId, index){
+        console.log(this.searchedData[index]);
         $http.post('/api/follow', {
             follower: followerId,
-            following: FollowingId
+            followed: FollowedId
         }).then((result) => {
-            // kam idar krna hai
+            
             console.log(result);
         }).catch((err) => {
             console.log(err);

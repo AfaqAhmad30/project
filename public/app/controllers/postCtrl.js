@@ -1,7 +1,7 @@
 
-angular.module('postControllers', ['ngFileUpload', 'postServices'])
+angular.module('postControllers', ['ngFileUpload'])
 
-.controller('postCtrl', ['$scope', '$http','Upload', 'uploadPost', '$routeParams', function($scope, $http, Upload, uploadPost, $routeParams) {
+.controller('postCtrl', ['$scope', '$http','Upload', '$routeParams', function($scope, $http, Upload, $routeParams) {
     var app = this;
     var userData = {
         author: $routeParams.userId
@@ -51,6 +51,15 @@ angular.module('postControllers', ['ngFileUpload', 'postServices'])
             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
             console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
         });
+    };
+
+
+    $scope.postLiked = (postId, userId, index) => {
+        $http.post('/api/postLiked', { postId: postId, userId: userId }).then((resp) => {
+            // $scope.posts[index]
+        }).catch((err) => {
+            console.log(err);
+        })
     };
 
 
