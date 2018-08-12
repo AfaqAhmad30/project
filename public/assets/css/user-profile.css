@@ -1,0 +1,24 @@
+
+#p-nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color:#fff;
+}
+
+
+#p-nav li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 10px 10px;
+    text-decoration: none;
+}
+
+#p-nav li a:hover:not(.active) {
+  color: #55CDFC;
+    
+    font-weight: bolder;
+}
+

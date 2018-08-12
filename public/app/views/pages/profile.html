@@ -12,25 +12,25 @@
             <div id="p-dp-div" class="col-sm-3">
                 <img src="/assets/no-profile.jpg" alt="profile photo" class="rounded-circle">
             </div>
-            <ul class="nav col-sm-6">
-                <li class="nav-link" style="border-bottom: 2px solid #55CDFC;">
+            <ul class="nav col-sm-6 p-0 m-0" id="p-nav">
+                <li class="nav-link btn btn-outline-light" style="border-bottom: 2px solid #55CDFC;">
                     <a href="/profile/{{ main._id }}">Timeline</a>
                 </li>
-                <li class="nav-link">
+                <li class="nav-link btn btn-outline-light">
                     <a href="/profile/{{ main._id }}/about">About</a>
                 </li>
-                <li class="nav-link">
+                <li class="nav-link btn btn-outline-light">
                     <a href="/profile/{{ main._id }}/friends">Friends</a>
                 </li>
-                <li class="nav-link">
+                <li class="nav-link btn btn-outline-light">
                     <a href="/profile/{{ main._id }}/photos">Photos</a>
                 </li>
-                <li class="nav-link">
+                <li class="nav-link btn btn-outline-light">
                     <a href="#">Others</a>
                 </li>
             </ul>
             <ul class="nav col-sm-3">
-                <li class="nav-link align-middle">
+                <li class="nav-link align-middle  btn btn-outline-light">
                     <a href="#">Edit Profile</a>
                 </li>
             </ul>
@@ -39,7 +39,7 @@
 
     <div id="p-main-body" class="row mx-0">
         <div id="p-user-details" class="col-sm-3">
-            <h4 style="color: #55CDFC">{{ userDetails.firstName + ' ' + userDetails.lastName }}</h4>
+            <h4 style="color: #55CDFC ;">{{ userDetails.firstName + ' ' + userDetails.lastName }}</h4>
             <ul>
                 <li>Bio</li>
                 <li>From</li>
@@ -51,14 +51,14 @@
         <div class="col-sm-6" ng-controller="postCtrl">
             <div ng-show="main._id===userDetails._id">
                 <form name="form" enctype="multipart/form-data">
-                    <input type="text" ng-model="newPost.description" placeholder="Write Something...">
+                    <input style="border-radius: 10px; width: 20em;height: 2em;" type="text" ng-model="newPost.description" placeholder="Write Something...">
                     <div class="button" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
-                        ngf-accept="'image/*'"><a href="">Select File</a>
+                        ngf-accept="'image/*'"><a href="" class="fa fa-image "><p class="m-0">Select Image</p></a>
                     </div>
-                    <button type="submit" ng-click="submit()">Post</button>
+                    <button class="btn btn-info" type="submit" ng-click="submit()">Post</button>
                 </form>
             </div>
-            
+            <br>
 
             <div>
                 <div ng-repeat="post in posts" style="background-color: white;" class="rounded mb-3">
