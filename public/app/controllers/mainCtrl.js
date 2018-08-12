@@ -1,6 +1,33 @@
  angular.module('mainController', ['authServices'])
 .controller('mainCtrl', function(auth, $timeout, $location, $rootScope, $http){
     var app = this;
+    app.doActive = function(loc) {
+        
+        if(loc === 'home') {
+            var a = angular.element( document.querySelector( '.homeLoc' ) );
+            var b = angular.element( document.querySelector( '.msgLoc' ) );
+            var c = angular.element( document.querySelector( '.proLoc' ) );
+            a.addClass('makeActive');
+            b.removeClass('makeActive');
+            c.removeClass('makeActive');
+        } else if(loc === 'messages') {
+            var a = angular.element( document.querySelector( '.homeLoc' ) );
+            var b = angular.element( document.querySelector( '.msgLoc' ) );
+            var c = angular.element( document.querySelector( '.proLoc' ) );
+            a.removeClass('makeActive');
+            b.addClass('makeActive');
+            c.removeClass('makeActive');
+        } else {
+            var a = angular.element( document.querySelector( '.homeLoc' ) );
+            var b = angular.element( document.querySelector( '.msgLoc' ) );
+            var c = angular.element( document.querySelector( '.proLoc' ) );
+            a.removeClass('makeActive');
+            b.removeClass('makeActive');
+            c.addClass('makeActive');
+        }
+
+    };
+
     $rootScope.$on('$routeChangeStart', function() {
         if(auth.isLoggedIn()) {
             console.log('Success: user is logged in!');

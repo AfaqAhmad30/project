@@ -15,8 +15,13 @@
     <link rel="stylesheet" href="/assets/css/login.css">
     <link rel="stylesheet" href="/assets/css/font-awesome.css">
     <link rel="stylesheet" href="/assets/css/register.css">
+    <link rel="stylesheet" href="/assets/css/index.css">
+    <link rel="stylesheet" href="/assets/css/user-profile.css">
 
     <title>vTrans</title>
+    <link rel="icon" type="image/gif/png" href="../../assets/icons/logo/n-logo.png">
+
+
 
     <!-- Bootstrap core CSS -->
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
@@ -51,59 +56,67 @@
 
   <body ng-app="myApp" ng-controller="mainCtrl as main" style="background-color: #E6ECF0">
 
-    <nav ng-show="main.isLoggedIn" class="navbar navbar-expand-md navbar-light" style="background-color: #ffffff; height: 45px;">
-      <div class="container">
- 
-        <a class="navbar-brand" href="/">vTrans</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+    
+        
+        <nav ng-show="main.isLoggedIn"  class="navbar navbar-icon-top navbar-expand-lg navbar-light font-weight-bold p-0 sticky-top "style="background-color: #FFFFFF; !imortant ">
 
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a ng-show="main.isLoggedIn" class="nav-link" href="/">Home</a>
-            </li>
-            <li class="nav-item">
-              <a ng-show="main.isLoggedIn" class="nav-link" href="/profile/{{ main._id }}">{{ main.firstName }}</a>
-            </li>
-            <li class="nav-item">
-              <a ng-show="main.isLoggedIn" class="nav-link" href="/messages">Messages</a>
-            </li>
-          </ul>
-          <form class="form-inline my-2 my-lg-0">
-              <div class="input-group">
-                <input type="text"  class="form-control" ng-model="main.searchValue" placeholder="Search" aria-label="Search">
-                <div class="input-group-append">
-                  <button ng-click="main.searchUser()" class="btn btn-outline-secondary" type="submit"><a href="/search">Search</a></button>
-                </div>
+         
+        
+          <div class=" container collapse navbar-collapse  p-0" id="navbarSupportedContent" >
+            <ul class="navbar-nav mr-auto" id="list">
+             
+              <li class="nav-item">
+                  <a ng-show="main.isLoggedIn" class="nav-link homeLoc" ng-click="main.doActive('home')" href="/">
+                    <i class="fa fa-home" ></i>
+                    Home</a>
+                </li>
+               
+              <li class="nav-item ">
+                <a ng-show="main.isLoggedIn" class="nav-link msgLoc" ng-click="main.doActive('messages')" href="/messages">
+                  <i class="fa fa-envelope-o"> </i>
+                  
+                  Messages
+                
+                </a>
+              </li>
+
+
+              <li class="nav-item ">
+                  <a ng-show="main.isLoggedIn" class="nav-link proLoc" ng-click="main.doActive('profile')" href="/profile/{{ main._id }}">{{ main.firstName }}</a>
+              </li>
+            </ul>
+
+          
+
+              <div id="img">
+                  <a   class="navbar-brand" href="/"> <img id="img" src="../../assets/icons/logo/n-logo.png" alt="logo"> </a>
               </div>
-          </form>
-          <ul class="active nav navbar-nav navbar-right">
-            <li class="nav-item">
-              <a ng-show="!main.isLoggedIn" class="nav-link" href="/register">Register</a>
-            </li>
-            <li class="nav-item">
-              <a ng-show="!main.isLoggedIn" class="nav-link" href="/login">Login</a>
-            </li>
-            <li class="nav-item">
-              <a ng-show="main.isLoggedIn" class="nav-link" href="#" ng-click="main.logout()">Logout</a>
-            </li>
-            <li class="nav-item">
-              <a ng-show="main.isLoggedIn" class="nav-link" href="#"><strong style="text-transform: capitalize">{{ main.firstName }}</strong></a>
-            </li>
-            <!-- <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false"></a>
-              <div class="dropdown-menu" aria-labelledby="dropdown01">
-                <a class="dropdown-item" href="#">Logout</a>
-                <a class="dropdown-item" href="#">Setting</a>
-                <a class="dropdown-item" href="#">Some other option</a>
-              </div>
-            </li> -->
-          </ul>
-        </div>
-      </div>
-    </nav>
+            
+
+            <form class="form-inline" >
+               
+                  <input id="search-bar" type="text"  class="form-control mr-sm-2" ng-model="main.searchValue" placeholder="Search" aria-label="Search">
+                
+                  <button id="search-bar" ng-click="main.searchUser()" class="btn btn-outline-primary" type="submit" ><a href="/search">Search</a></button>
+                 
+            </form>
+            
+            
+            <ul class="nav navbar-nav navbar-right" id="list">
+        
+                <li class="nav-item  ml-5"> 
+                    
+                  <a ng-show="main.isLoggedIn" class="nav-link " href="#" ng-click="main.logout()">
+                    <i class="fa fa-lock"> </i>
+                    Logout
+                  </a>
+                   
+                </li>
+              
+            </ul>
+          </div>
+        </nav>
+        
 
     <div ng-view></div>
 
