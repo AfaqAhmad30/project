@@ -11,6 +11,7 @@
         <div id="p-nav" class="row mx-0">
             <div id="p-dp-div" class="col-sm-3">
                 <img src="/assets/no-profile.jpg" alt="profile photo" class="rounded-circle">
+                
             </div>
             <ul class="nav col-sm-6">
                 <li class="nav-link" style="border-bottom: 2px solid #55CDFC;">
@@ -52,9 +53,8 @@
             <div ng-show="main._id===userDetails._id">
                 <form name="form" enctype="multipart/form-data">
                     <input type="text" ng-model="newPost.description" placeholder="Write Something...">
-                    <div class="button" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
-                        ngf-accept="'image/*'"><a href="">Select File</a>
-                    </div>
+                    <span class="fa fa-edit" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
+                        ngf-accept="'image/*'"></span>
                     <button type="submit" ng-click="submit()">Post</button>
                 </form>
             </div>
@@ -75,16 +75,32 @@
                                 <p>{{ post.description }}</p>
                                 <img ng-src="../../../media/{{post.media.filename}}" style="width: 100%;">
                                 <div>
-
-                                        <div ng-init="imgsrc='../../../assets/icons/like/like.png'" ng-mouseover="imgsrc='../../../assets/icons/like/likeHover.png'" 
-                                        ng-mouseout="imgsrc='../../../assets/icons/like/like.png'">
-                                            <img ng-src="{{imgsrc}}" style="width: 20px;"/>
-                                          </div>
-
-
-                                    <!-- <a href="#" class="post-actions" ><img src="../../../assets/images/like/like.png" id="p-like-icon" style="width: 20px;" alt="like"></a> -->
-
-                                    <a href="#" class="post-actions"><img src="#" alt="comment"></a>
+                                    <div>
+                                        <a href="#" ng-click="postLiked(post._id, main._id, $index)"><span class="fa fa-thumbs-o-up m-2"></span></a>
+                                            {{post.likes}}
+                                        <a href="#" class="post-actions" ng-click="showHideComment = !showHideComment"><span class="fa fa-comment-o m-2 ml-4"></span></a>
+                                            {{post.comments.length}}
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <div ng-show="showHideComment">
+                                        <div class="row">
+                                            <div class="col-1"><img src="../../../assets/images/default-profile.jpg" alt="" style="width: 30px;" class="rounded-circle"></div>
+                                            <div class="col-8"><input type="text" placeholder="Comment here" ng-model="post.comment"></div>
+                                            <div class="col-1"><input type="submit" value="comment" ng-click="placeComment(post._id, main._id, $index)"></div>
+                                        </div>
+                                        <div class="row" ng-repeat="comment in post.comments">
+                                            <div class="col-sm-1">
+                                                <img src="../../../assets/images/default-profile.jpg" alt="" style="width: 30px;" class="rounded-circle">
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <p>{{ comment.userId.firstName + ' ' + comment.userId.lastName }}</p>
+                                                <small>{{ comment.commentedOn }}</small>
+                                                <p>{{ comment.commentedText }}</p>
+                                                <button ng-click="deleteComment(comment._id, $parent.$index, $index)">delete</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -1,12 +1,16 @@
 
 var {Post} = require('../models/post');
-var multer = require('multer');
+var {Comment} = require('../models/comment');
+var {Like} = require('../models/like');
 
+var {Follow} = require('../models/follow');
 var user = require('../models/users');
+
 var jwt  =    require('jsonwebtoken');
 var secret = 'mySecret';
-var {Follow} = require('../models/follow');
-var {Like} = require('../models/like');
+
+var multer = require('multer');
+
 
 // Multer disk storage settings
 var storage = multer.diskStorage({
@@ -29,6 +33,7 @@ module.exports = function(router) {
         var uzer = new user();
         uzer.firstName = req.body.firstName;
         uzer.lastName = req.body.lastName;
+        uzer.fullName = req.body.firstName +' '+ req.body.lastName;
         uzer.DOB = req.body.DOB;
         uzer.email    = req.body.email;
         uzer.password = req.body.password;
@@ -139,7 +144,7 @@ module.exports = function(router) {
     });
     //Search Users
     router.post('/search', function(req, res){
-        user.find({ firstName:{ $regex: req.body.firstName, $options: 'i' }}).exec().then((result) => {
+        user.find({ fullName: { $regex: req.body.searchValue, $options: 'i' }}).sort('fullName').exec().then((result) => {
             res.json(result);
         }, (err) => {
             res.json(err);
@@ -148,15 +153,43 @@ module.exports = function(router) {
 
     // User follow someone
     router.post('/follow', function(req,res){
-        var follow = new Follow();
-        follow.follower = req.body.follower;
-        follow.followed = req.body.followed;
-        follow.save().then((result) => {
-            res.json(result);
+        Follow.findOne({followed: req.body.followed, follower: req.body.follower}).exec().then((resp) => {
+            if(resp) {
+                // means user already following
+                // so change to unfollow him/her
+                Follow.findOneAndRemove({followed: req.body.followed, follower: req.body.follower}).then((result) => {
+                    res.json({message: 'unfollow'});
+                })
+            } else {
+                // user not following
+                // so change it to follow him/her
+                var follow = new Follow();
+                follow.follower = req.body.follower;
+                follow.followed = req.body.followed;
+                follow.save().then((result) => {
+                    res.json({message: 'follow'});
+                })
+            }
         }).catch((err) => {
             res.json(err);
         });
     });
+
+
+    // check is user followed
+    router.post('/isFollowed', (req, res) => {
+        Follow.findOne({followed: req.body.followed, follower: req.body.follower}).exec().then((resp) => {
+            if(resp) {
+                res.json({message: 'yes'});
+            } else {
+                res.json({message: 'no'});
+            }
+        }).catch((err) => {
+            res.json(err);
+        });
+    });
+
+
 
     // User like a post
     router.post('/postLiked', (req, res) => {
@@ -165,6 +198,54 @@ module.exports = function(router) {
         like.userId = req.body.userId;
         like.save().then((result) => {
             res.json(result);
+        }).catch((err) => {
+            res.json(err);
+        });
+    });
+
+    router.post('/post/likes', (req, res) => {
+        Like.find({postId: req.body._id}).exec().then((result) => {
+            res.json(result);
+        }).catch((err) => {
+            res.json(err);
+        });
+    });
+
+    // posted new comment to user post
+    router.post('/post/newComment', (req, res) => {
+        var comment = new Comment();
+        comment.postId = req.body.postId;
+        comment.userId = req.body.userId;
+        comment.commentedOn = new Date().getTime();
+        comment.commentedText = req.body.commentedText;
+
+        comment.save().then((resp) => {
+            res.json(resp);
+        }).catch((err) => {
+            res.json(err);
+        });
+    });
+
+    // get all the comments for a post
+    router.post('/post/getComments', (req, res) => {
+        Comment.find({postId: req.body.postId}).populate('userId', 'firstName lastName').exec().then((comments) => {
+            res.json(comments);
+        }).catch((err) => {
+            res.json(err);
+        });
+    });
+
+    router.post('/post/getComment', (req, res) => {
+        Comment.findById(req.body._id).populate('userId', 'firstName lastName').exec().then((comment) => {
+            res.json(comment);
+        }).catch((err) => {
+            res.json(err);
+        });
+    });
+
+    router.post('/post/deleteComment', (req, res) => {
+        Comment.findByIdAndRemove(req.body._id).then((resp) => {
+            res.json(resp);
         }).catch((err) => {
             res.json(err);
         });

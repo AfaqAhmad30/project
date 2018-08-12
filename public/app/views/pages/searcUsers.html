@@ -15,7 +15,7 @@
         <div>
             <div class="col-2">
             <img src="assets/no-profile.jpg" alt="profile avatar" style="margin-left: 10px; height: 40px;" class="rounded-circle">
-            <a style="margin-left: 10px;" href="/profile/{{user._id}}"> {{ user.firstName }}</a>
+            <a style="margin-left: 10px;" href="/profile/{{user._id}}"> {{ user.fullName }}</a>
                 <div>
                     
                 </div>
@@ -24,7 +24,7 @@
             <div class="col-2">
             <text style="margin-left: 60px;"><strong>Kohat,Pakistan</strong></text>
             <div>
-                <button ng-show="main._id!== user._id" ng-click="main.follow(main._id , user._id, $index)" style="margin-left: 60px;" type="submit">Follow</button>
+                <button ng-show="main._id!== user._id" ng-click="main.follow(main._id , user._id, $index)" style="margin-left: 60px;" type="submit">{{user.followed}}</button>
                 <h6 ng-show="main._id===user._id">Me</h6>
             </div>
             </div>

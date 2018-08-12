@@ -56,22 +56,32 @@
 
     this.searchUser = function() {
         $http.post('/api/search', {
-            firstName: this.searchValue
+            searchValue: this.searchValue
         }).then((result) => {
+            result.data.forEach(user => {
+                $http.post('/api/isFollowed', {followed: user._id, follower: app._id}).then((result) => {
+                    if(result.data.message === 'yes') {
+                        user.followed = 'Following';
+                    } else {
+                        user.followed = 'Follow';
+                    }
+                });
+            });
             this.searchedData = result.data;
-            console.log(this.searchedData)
         }).catch((err) => {
             console.log(err);
         })
     }
-    this.follow = function(followerId,FollowedId, index){
-        console.log(this.searchedData[index]);
+    this.follow = function(followerId, followedId, index){
         $http.post('/api/follow', {
             follower: followerId,
-            followed: FollowedId
+            followed: followedId
         }).then((result) => {
-            
-            console.log(result);
+            if(result.data.message === 'follow') {
+                this.searchedData[index].followed = 'Following';
+            } else {
+                this.searchedData[index].followed = 'Follow';
+            }
         }).catch((err) => {
             console.log(err);
         });
