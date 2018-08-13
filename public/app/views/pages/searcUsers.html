@@ -1,63 +1,50 @@
 <div class="panel panel-info  p-0 m-0">
-    <!-- <div class="panel-heading" style="text-align: center; background: dodgerblue"><strong style="text-transform: capitalize">Matched Users</strong></div> -->
-
-    <div class="container ">
+    <div ng-show="main.searchedValue" style="height: 50px; background-color: #55cdfc">
+            <h5 class="container" style="color: #ffffff; font-weight: bold;">{{main.searchedValue}}</h5>
+    </div>
+    <div class="container">
         <div class="row">
-
             <!-- Left portion of user profile -->
-            <div class="col-sm-3 bg-info text-white"> 
-                <h1> Hello There! :) </h1>
+            <div class="col-sm-3"> 
+                <h6>Who to follow</h6>
+                <div class="row" ng-repeat="x in main.a">
+                    <div>
+                        <img style="height: 50px;" class="rounded-circle" src="{{user.profile? ('../../../media/' + user.profile) : ('../../../assets/images/default-profile.jpg')}}" alt="dp">
+                    </div>
+                    <div>
+                        <h6>Saleh Banoori</h6>
+                        <small>Student</small>
+                        <button>Follow</button>
+                    </div>
+                </div>
             </div>
         
             <!-- middle -->
-            <div class="col-sm-6  ">
-                <h5 style="font-weight: bold;">Searched users by First Name</h5>
-                <br>
-                <div ng-repeat="user in main.searchedData" class="row">
-                    <div class="col-2">
-                        <img src="assets/no-profile.jpg" alt="profile avatar" style=" height: 45px;" class="rounded-circle">
+            <div class="col-sm-9">
+                <div class="row">
+                    <div ng-repeat="user in main.searchedData" class="col-sm-4 m-0 p-0">
+                        <div style="height: 300px;" class="bg-white ml-2 mt-2">
+                            <div class="">
+                                <img style="width: 100%; height: 100px;" ng-src="{{user.cover? ('../../../media/' + user.cover) : ('../../../assets/images/default-cover.jpg')}}" alt="cover">
+                            </div>
+                            <div class="row">
+                                <div class="col-7">
+                                    <img ng-src="{{user.profile? ('../../../media/' + user.profile) : ('../../../assets/images/default-profile.jpg')}}" alt="profile avatar" style=" height: 50px;" class="rounded-circle">
+                                </div>
+                                <div class="col-5">
+                                    <button style="border-radius: 20px;" class="btn btn-outline-secondary"  ng-show="main._id!== user._id" ng-click="main.follow(main._id , user._id, $index)"  type="submit">{{ user.followed }}</button>
+                                </div>
+                            </div>
+                            <div>
+                                <a style="font-weight: bold" href="/profile/{{user._id}}">{{ user.fullName }}</a>
+                                <p>{{ user.work }}</p>
+                                <p>{{ user.status }}</p>
+                            </div>
+                        </div>
+                        
                     </div>
-                    <div class="col-5 ">
-                        <a style="font-weight: bold" href="/profile/{{user._id}}">{{ user.fullName }}</a>
-                        <p style=""><strong>Kohat,Pakistan</strong></p>
-                    </div>
-                    <br>
-                    <div class="col-3">
-                        <button class="btn btn-outline-secondary"  ng-show="main._id!== user._id" ng-click="main.follow(main._id , user._id, $index)"  type="submit">{{ user.followed }}</button>
-                        <h6 ng-show="main._id===user._id"> <strong>ME</strong></h6>
-                    </div>
-                    <br>
                 </div>
             </div>
-
-            <!-- right side -->
-            <div class="col-sm-3"  >
-                
-                <div class="row " p-0 m-0> 
-                    <h4><strong>Articles...</strong></h4>
-                    <div>       
-                        <a href="https://www.dawn.com/news/1399970" target="_blank"> 
-                            <img width="250" height="150px" border="0" align="center"  src="../../../assets/images/school.jpg"/> 
-                            <p>Pakistan's First-ever School For Transgender</p>  
-                        </a> 
-                    </div>
-                    <br>
-                    <div>
-                        <a href="https://www.pakistantoday.com.pk/2018/07/23/coke-studio-11-brings-transgender-singers-in-the-spotlight/" target="_blank"> 
-                            <img width="250" height="150px" border="0" align="center"  src="../../../assets/images/coke-studio.jpg"/> 
-                            <p>Coke Studio 11 brings transgender singers in the spotlight</p>  
-                        </a>     
-                    </div>
-                    <br>
-                    <div>
-                        <a href="https://www.aljazeera.com/news/2018/05/pakistan-passes-landmark-transgender-rights-law-180509095207950.html" target="_blank"> 
-                            <img width="250" height="150px" border="0" align="center"  src="../../../assets/images/news.jpg"/> 
-                            <p>Pakistan passes landmark transgender rights law</p>  
-                        </a>      
-                    </div>
-                    <br>
-                </div> 
-            </div>   
         </div>
     </div>
 </div>

@@ -1,20 +1,22 @@
 <div class="container mt-20">
     <div class="row">
 
-        <!-- Left portion of user profile -->
+        <!-- Left portion of Home -->
         <div class="col-sm-3">
     
             <!-- Profile Portion -->
             <div id="profile-details">
-                <div id="cover-photo"></div>
+                <div id="cover-photo">
+                    <img src="{{main.loginUser.profile? ('../../../media/' + main.loginUser.cover) : ('../../../assets/images/default-cover.jpg')}}" alt="">
+                </div>
                 <div id="profile-main-details">
-                    <a href="/profile">
-                        <img id="profile-image" src="../../../assets/image.png" alt="profile image">
+                    <a href="/profile/{{main._id}}">
+                        <img id="profile-image" src="{{main.loginUser.profile? ('../../../media/' + main.loginUser.profile) : ('../../../assets/images/default-profile.jpg')}}" alt="profile image">
                     </a>
                     <h6>
-                        <a href="/profile">{{ main.firstName + ' ' + main.lastName }}</a>
+                        <a href="/profile/{{main._id}}">{{ main.loginUser.fullName }}</a>
                     </h6>
-                    <p>It's not about how much do you have, it's about what you do with what you have!</p>
+                    <p>{{ main.loginUser.status }}</p>
                     <ul style="
                         list-style: none;
                         padding: 0;
@@ -61,7 +63,7 @@
     
         </div>
         
-        <!-- Main portion of user profile -->
+        <!-- Main portion of Home -->
         <div class="col-sm-6">
     
             <!-- Add new post to user timeline -->
@@ -75,30 +77,17 @@
             </div>
         </div>
     
-        <!-- Right portion of user profile -->
+        <!-- Right portion of Home -->
         <div class="col-sm-3">
-
-                <h3><strong>Stories</strong></h3>
-
-                <div class="embed-responsive embed-responsive-16by9   ">   
-                    <iframe width="853" height="480" src="https://www.youtube.com/embed/3lbSYOux0O4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                    </div>
-<br>
-                <div class="embed-responsive embed-responsive-16by9">
-                        <iframe  src="https://www.youtube.com/embed/PCd095LEiUg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                      </div>
-
-                        <br>
-        <div class="embed-responsive embed-responsive-16by9  ">
-
-                <iframe  src="https://www.youtube.com/embed/DvBksrnS1RY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>        
-        </div>
-        <br>
-        <div class="embed-responsive embed-responsive-16by9  ">     
-        <iframe width="853" height="480" src="https://www.youtube.com/embed/ElpPjuz5uhs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-</div>
-<br>
-
+            <div class="bg-white rounded">
+                <h6>Who to follow</h6>
+                <div>
+                    <img src="../../../assets/images/default-profile.jpg" alt="" style="width: 30px;">
+                    <p>fullName</p>
+                    <p>work</p>
+                    <button>follow</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

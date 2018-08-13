@@ -59,7 +59,7 @@ module.exports = function(router) {
 
     //user Login Route
     router.post('/authenticate', function(req, res){
-        user.findOne({ email: req.body.email }).select('_id firstName lastName email password').exec(function(err,user)
+        user.findOne({ email: req.body.email }).exec(function(err,user)
         {
             if(err) throw err;
 
@@ -74,7 +74,9 @@ module.exports = function(router) {
                 if(!validPassword) {
                     res.json({success: false, message: 'invalid password'})
                 } else {
+                    console.log(user);
                     var token = jwt.sign({
+                        user: user,
                         firstName: user.firstName,
                         lastName: user.lastName,
                         email: user.email,

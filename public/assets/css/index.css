@@ -10,38 +10,37 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 3px;
-    padding: auto;
-    
+    padding: auto;    
 }
-
 
 #list li a {
-    color: rgb(66, 66, 66);
+  color: rgb(66, 66, 66);
   font-size: 16px;
-
 }
 
-
-
 #list li a:hover   {
-    color: #55cdfc;
+  color: #55cdfc;
 	box-shadow: 0 2px #55cdfc;
 	font-weight: lighter;
     
 }
 .makeActive {
-    color: #55cdfc !important;
+  color: #55cdfc !important;
 	box-shadow: 0 2px #55cdfc;
 	font-weight: lighter;
 }
 
-#search-bar {
-    border-radius: 20px;
-    
-    text-decoration: none;
-    
-
+.search-bar {
+  border-radius: 20px !important;
 }
+
+#searchIcon {
+  color: gray;
+  position: relative;
+  left: -32px;
+  top: -1px;
+}
+
 /* 
 .navbar-icon-top .navbar-nav .nav-link > .fa {
   position: relative;

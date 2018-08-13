@@ -4,14 +4,13 @@
     <div>    
         <!-- cover photo -->
         <div id="p-cover-div">
-            <img src="/assets/cover.jpg" alt="cover photo">
+            <img src="{{userDetails.profile? ('../../../media/' + userDetails.cover) : ('../../../assets/images/default-cover.jpg')}}" alt="cover photo">
         </div>
 
         <!-- nav bar with profile photo on left side -->
         <div id="p-nav" class="row mx-0">
             <div id="p-dp-div" class="col-sm-3">
-                <img src="/assets/no-profile.jpg" alt="profile photo" class="rounded-circle">
-                
+                <img src="{{userDetails.profile? ('../../../media/' + userDetails.profile) : ('../../../assets/images/default-profile.jpg')}}" alt="profile photo" class="rounded-circle">
             </div>
             <ul class="nav col-sm-6 p-0 m-0" id="p-nav">
                 <li class="nav-link btn btn-outline-light" style="border-bottom: 2px solid #55CDFC;">
@@ -40,7 +39,7 @@
 
     <div id="p-main-body" class="row mx-0">
         <div id="p-user-details" class="col-sm-3">
-            <h4 style="color: #55CDFC ;">{{ userDetails.firstName + ' ' + userDetails.lastName }}</h4>
+            <h4 style="color: #55CDFC ;">{{ userDetails.fullName }}</h4>
             <ul>
                 <li>Bio</li>
                 <li>From</li>

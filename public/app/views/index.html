@@ -95,9 +95,8 @@
 
             <form class="form-inline" >
                
-                  <input id="search-bar" type="text"  class="form-control mr-sm-2" ng-model="main.searchValue" placeholder="Search" aria-label="Search">
-                
-                  <button id="search-bar" ng-click="main.searchUser()" class="btn btn-outline-primary" type="submit" ><a href="/search">Search</a></button>
+                  <input type="text"  class="form-control search-bar mr-sm-2" ng-model="main.searchValue" placeholder="Search" aria-label="Search">
+                  <a ng-href="{{ main.searchValue===''? '#' : '/search' }}" ng-click="main.searchUser()" id="searchIcon"><span class="fa fa-search"></span></a>
                  
             </form>
             
