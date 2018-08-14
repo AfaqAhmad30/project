@@ -111,18 +111,50 @@
                 </div>
             </div>
         </div>
-    
+
+        <div class="col-sm-3 bg-light"> 
+                <h5  style="font-weight: bolder"> Who To follow...</h5>
+                
+                <div class="row pb-3" ng-repeat="x in main.a" style="background-color: #ffffff;">
+                        
+                    <div class= "col-sm-3">
+                        <img style="height: 50px;" class="rounded-circle" src="{{user.profile? ('../../../media/' + user.profile) : ('../../../assets/images/default-profile.jpg')}}" alt="dp">
+                    </div>
+                 
+                    <div >
+                        
+                        <h6><strong> Saleh Banoori</strong></h6>
+                        <button class="btn btn-secondary btn-sm p-0 m-0 px-3" style="border-radius: 20px; height: 25px;">Follow</button>
+                    </div>
+                   
+                        
+                </div>
+            
+            </div>
+           
         <!-- Right portion of Home -->
-        <div class="col-sm-3">
-            <div class="bg-white rounded">
+        <!-- <div class="col-sm-3 bg-white">
+            <div class=" ">
                 <h6>Who to follow</h6>
-                <div>
+                <!-- <div>
                     <img src="../../../assets/images/default-profile.jpg" alt="" style="width: 30px;">
                     <p>fullName</p>
                     <p>work</p>
                     <button>follow</button>
+                </div> -->
+                <!-- <div class="row pb-3" ng-repeat="x in main.a" style="background-color: #ffffff;"> -->
+                        <!-- <img style="height: 50px;" class="rounded-circle" src="{{user.profile? ('../../../media/' + user.profile) : ('../../../assets/images/default-profile.jpg')}}" alt="dp">
+                   
+                 
+                  
+                        
+                        <h6><strong> Saleh Banoori</strong></h6>
+                        <button class="btn btn-secondary btn-sm p-0 m-0 px-3" style="border-radius: 20px; height: 25px;">Follow</button>
+                   -->
+                   
+                        
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
