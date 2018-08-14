@@ -9,13 +9,15 @@ fullName:       {type: String},
 DOB:            {type: Date, required: true},
 email:          {trim: true, type: String, required: true, unique: true},
 password:       {type: String, required: true},
+phone:          {type: String},
 profile:        {type: String},
 cover:          {type: String},
 hometown:       {type: String},
 currentLoc:     {type: String},
 education:      {type: String},
-work:           {type: String, default: 'vTrans user'},
-status:         {type: String, default: 'Hey there! I am using vTrans, a social network for Transgender'}
+work:           {type: String, default: 'not provided'},
+status:         {type: String, default: 'Hey there! I am using vTrans, a social network for Transgender'},
+joinedDate:     {type: Date}
 });
 
 userSchema.pre('save', function(next){

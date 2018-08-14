@@ -1,4 +1,5 @@
 
+
 var {Post} = require('../models/post');
 var {Comment} = require('../models/comment');
 var {Like} = require('../models/like');
@@ -104,10 +105,23 @@ module.exports = function(router) {
         });
     });
 
-
+    var ids = [];
     // Get all post to timeline
     router.post('/posts', (req, res) => {
-        Post.find({author: req.body.author}).populate('author', 'firstName lastName').sort({time: -1}).exec().then((posts) => {
+        if(req.body.page === 'home') {
+            console.log('homeeeeeeeeeeeeee');
+            Follow.find({follower: req.body.author}).select('followed -_id').exec().then((userIds) =>{
+                userIds.forEach(function(user) {
+                    ids.push(user.followed.toString());
+                })
+                ids.push(req.body.author);
+                
+            });
+        } else {
+            ids.push(req.body.author);
+        }
+        
+        Post.find({author: ids}).populate('author', 'fullName profile').sort({time: -1}).exec().then((posts) => {
             res.json(posts);
         }).catch((err) => {
             res.json(err);
@@ -153,7 +167,7 @@ module.exports = function(router) {
         });
     });
 
-    // User follow someone
+    // User follow or unfollow someone
     router.post('/follow', function(req,res){
         Follow.findOne({followed: req.body.followed, follower: req.body.follower}).exec().then((resp) => {
             if(resp) {
@@ -178,7 +192,8 @@ module.exports = function(router) {
     });
 
 
-    // check is user followed
+    // check is user following
+    // use for follow unfollow button
     router.post('/isFollowed', (req, res) => {
         Follow.findOne({followed: req.body.followed, follower: req.body.follower}).exec().then((resp) => {
             if(resp) {
@@ -191,6 +206,35 @@ module.exports = function(router) {
         });
     });
 
+
+    // get the users that you follow
+    router.post('/getFollowing', (req, res) => {
+        Follow.find({follower: req.body.follower}).populate('followed').sort({_id: -1}).exec().then((resp) => {
+            res.json(resp);
+        }).catch((err) => {
+            res.json(err);
+        });
+    });
+
+
+    // get the followers
+    router.post('/getFollower', (req, res) => {
+        Follow.find({followed: req.body.followed}).populate('follower').sort({_id: -1}).exec().then((resp) => {
+            res.json(resp);
+        }).catch((err) => {
+            res.json(err);
+        });
+    });
+
+
+    // get user posts images
+    router.post('/getPostsImages', (req, res) => {
+        Post.find({author: req.body.author}).select('media').sort({_id: -1}).exec().then((posts) => {
+            res.json(posts);
+        }).catch((err) => {
+            res.json(err);
+        });
+    });
 
 
     // User like a post
