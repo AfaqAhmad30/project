@@ -54,15 +54,6 @@ angular.module('appRoutes',['ngRoute', 'ui.router'])
         .when('/profile/:userId', {
             templateUrl: 'app/views/pages/profile.html'
         })
-        .when('/profile/:userId/about', {
-            templateUrl: 'app/views/pages/profile/about.html'
-        })
-        .when('/profile/:userId/friends', {
-            templateUrl: 'app/views/pages/profile/friends.html'
-        })
-        .when('/profile/:userId/photos', {
-            templateUrl: 'app/views/pages/profile/photos.html'
-        })
         .when('/messages', {
             templateUrl: 'app/views/pages/messages.html'
         })

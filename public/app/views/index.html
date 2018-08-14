@@ -42,9 +42,9 @@
     <script src="/app/routes.js"></script>
 
     <!-- Angularjs Services and Controllers -->
-    <script src="/app/services/postServices.js"></script>
     <script src="/app/controllers/profileCtrl.js"></script>
     <script src="/app/controllers/postCtrl.js"></script>
+    <script src="/app/controllers/followCtrl.js"></script>
     <script src="/app/controllers/userCtrls.js"></script>
     <script src="/app/controllers/mainCtrl.js"></script>
     <script src="/app/services/userServices.js"></script>
@@ -75,9 +75,7 @@
               <li class="nav-item ">
                 <a ng-show="main.isLoggedIn" class="nav-link msgLoc" ng-click="main.doActive('messages')" href="/messages">
                   <i class="fa fa-envelope-o"> </i>
-                  
                   Messages
-                
                 </a>
               </li>
 

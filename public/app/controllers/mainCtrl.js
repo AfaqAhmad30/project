@@ -38,6 +38,7 @@
                     app.lastName = data.data.lastName;
                     app.email = data.data.email;
                     app._id = data.data._id;
+                    $rootScope.loginUserId = app.loginUser._id;
                     if(location.href == 'http://localhost:8080/login' || location.href == 'http://localhost:8080/register'){
                     $location.path('/')
                     }

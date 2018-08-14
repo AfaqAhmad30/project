@@ -64,14 +64,49 @@
         </div>
         
         <!-- Main portion of Home -->
-        <div class="col-sm-6">
-    
-            <!-- Add new post to user timeline -->
-            <div id="new-post-div">
-                <div id="new-post-inner-div" class="input-group">
-                    <input type="text" placeholder="What is in your mind write here" class="form-control">
-                    <div id="new-post-button-div">
-                        <button class="btn btn-outline-secondary" type="button">Post </button>
+        <div class="col-sm-6" ng-controller="postCtrl">
+            <div ng-repeat="post in posts" style="background-color: white;" class="rounded mb-3">
+                <div class="row" style="padding: 10px;">
+                    <div class="col-1">
+                        <img src="{{post.author.profile? ('../../../media/' + post.author.profile) : ('../../../assets/images/default-profile.jpg')}}" alt="profile avatar" style="margin-left: 10px; height: 50px;" class="rounded-circle">
+                    </div>
+                    <div class="col-10" style="margin-left: 20px;">
+                        <div>
+                            <h6>{{ post.author.fullName}}</h6>
+                            <p><small>{{ post.time }}</small></p>
+                        </div>
+                        <div>
+                            <p>{{ post.description }}</p>
+                            <img ng-src="../../../media/{{post.media.filename}}" style="width: 100%;">
+                            <div>
+                                <div>
+                                    <a href="#" ng-click="postLiked(post._id, main._id, $index)"><span class="fa fa-thumbs-o-up m-2"></span></a>
+                                        {{post.likes}}
+                                    <a href="#" class="post-actions" ng-click="showHideComment = !showHideComment"><span class="fa fa-comment-o m-2 ml-4"></span></a>
+                                        {{post.comments.length}}
+                                </div>
+                                <br>
+                                <br>
+                                <div ng-show="showHideComment">
+                                    <div class="row">
+                                        <div class="col-1"><img src="../../../assets/images/default-profile.jpg" alt="" style="width: 30px;" class="rounded-circle"></div>
+                                        <div class="col-8"><input type="text" placeholder="Comment here" ng-model="post.comment"></div>
+                                        <div class="col-1"><input type="submit" value="comment" ng-click="placeComment(post._id, main._id, $index)"></div>
+                                    </div>
+                                    <div class="row" ng-repeat="comment in post.comments">
+                                        <div class="col-sm-1">
+                                            <img src="../../../assets/images/default-profile.jpg" alt="" style="width: 30px;" class="rounded-circle">
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <p>{{ comment.userId.firstName + ' ' + comment.userId.lastName }}</p>
+                                            <small>{{ comment.commentedOn }}</small>
+                                            <p>{{ comment.commentedText }}</p>
+                                            <button ng-click="deleteComment(comment._id, $parent.$index, $index)">delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
