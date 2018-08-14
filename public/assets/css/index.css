@@ -4,13 +4,14 @@
     height: 45px;
     
 }
-#img{
+#img {
+    
     width: 35px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 3px;
-    padding: auto;    
+   display: block;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: 0px;
+       
 }
 
 #list li a {

@@ -86,20 +86,19 @@
               </li>
             </ul>
 
-          
-
+      
               <div id="img">
-                  <a   class="navbar-brand" href="/"> <img id="img" src="../../assets/icons/logo/n-logo.png" alt="logo"> </a>
+                  <a   class="navbar-brand  align-text-top" href="/"> <img id="img" src="../../assets/icons/logo/n-logo.png" alt="logo"> </a>
               </div>
             
-
+          <div>
             <form class="form-inline" >
                
-                  <input type="text"  class="form-control search-bar mr-sm-2" ng-model="main.searchValue" placeholder="Search" aria-label="Search">
+                  <input type="text"  class="form-control search-bar mr-sm-1" ng-model="main.searchValue" placeholder="Search" aria-label="Search">
                   <a ng-href="{{ main.searchValue===''? '#' : '/search' }}" ng-click="main.searchUser()" id="searchIcon"><span class="fa fa-search"></span></a>
                  
             </form>
-            
+          </div>
             
             <ul class="nav navbar-nav navbar-right" id="list">
         
