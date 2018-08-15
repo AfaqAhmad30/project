@@ -2,20 +2,25 @@
 angular.module('postControllers', ['ngFileUpload'])
 
 .controller('postCtrl', ['$scope', '$http','Upload', '$routeParams', '$location', '$rootScope', function($scope, $http, Upload, $routeParams, $location, $rootScope) {
-    
+
     var userData = {
         author: $routeParams.userId
     };
 
+    // Array for storing posts
+    $scope.posts = [];
+
     if($location.url() === '/') {
         userData.author = $rootScope.loginUserId;
         userData.page = 'home';
+    } 
+    else {
+        userData.author = $routeParams.userId;
     }
 
     $scope.showHideComment = false;
 
     // Get all the post for user timeline
-    $scope.posts = [];
     $http.post('/api/posts', userData).then((posts) => {
         $scope.posts = posts.data;
         posts.data.forEach(function(post) {

@@ -39,6 +39,7 @@ module.exports = function(router) {
         uzer.email    = req.body.email;
         uzer.password = req.body.password;
         uzer.password2 = req.body.password2;
+        uzer.joinedDate = new Date().getTime();
 
         if(req.body.firstName == '' || req.body.firstName == null || req.body.lastName == '' || req.body.lastName == null || req.body.DOB == '' || req.body.email == null || req.body.email == '' || req.body.password == null || req.body.password == '' || req.body.password2 == null || req.body.password2 == '')
             {
@@ -109,7 +110,6 @@ module.exports = function(router) {
     // Get all post to timeline
     router.post('/posts', (req, res) => {
         if(req.body.page === 'home') {
-            console.log('homeeeeeeeeeeeeee');
             Follow.find({follower: req.body.author}).select('followed -_id').exec().then((userIds) =>{
                 userIds.forEach(function(user) {
                     ids.push(user.followed.toString());
@@ -118,9 +118,9 @@ module.exports = function(router) {
                 
             });
         } else {
+            ids = [];
             ids.push(req.body.author);
         }
-        
         Post.find({author: ids}).populate('author', 'fullName profile').sort({time: -1}).exec().then((posts) => {
             res.json(posts);
         }).catch((err) => {
@@ -158,6 +158,12 @@ module.exports = function(router) {
             res.json(err);
         });
     });
+
+    // update user profile
+    router.post('/updateUserProfile', (req, res) => {
+        // user.findOneAndUpdate({_id: req.body.userData})
+    })
+
     //Search Users
     router.post('/search', function(req, res){
         user.find({ fullName: { $regex: req.body.searchValue, $options: 'i' }}).sort('fullName').exec().then((result) => {

@@ -48,6 +48,7 @@
     <script src="/app/controllers/mainCtrl.js"></script>
     <script src="/app/services/userServices.js"></script>
     <script src="/app/services/authServices.js"></script>
+    <script src="/app/controllers/proUpdateCtrl.js"></script>
 
     <!-- moment js file for timestamp -->
     <script src="/assets/js/moment.js"></script>
@@ -66,7 +67,7 @@
             <ul class="navbar-nav mr-auto" id="list">
              
               <li class="nav-item">
-                  <a ng-show="main.isLoggedIn" class="nav-link homeLoc" ng-click="main.doActive('home')" href="/">
+                  <a ng-show="main.isLoggedIn" class="nav-link homeLoc" ng-click="main.doActive('home');" href="/">
                     <i class="fa fa-home" ></i>
                     Home</a>
                 </li>

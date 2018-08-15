@@ -60,6 +60,10 @@ angular.module('appRoutes',['ngRoute', 'ui.router'])
         .when('/search', {
             templateUrl: 'app/views/pages/searcUsers.html'
         })
+        .when('/profileEdit', {
+            templateUrl: 'app/views/pages/profileEdit.html'
+        })
+
         .otherwise({ redirectTo: '/' });
 
 

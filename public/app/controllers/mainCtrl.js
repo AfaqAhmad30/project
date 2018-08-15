@@ -1,6 +1,7 @@
  angular.module('mainController', ['authServices'])
 .controller('mainCtrl', function(auth, $timeout, $location, $rootScope, $http){
     var app = this;
+    app.loginUser = {};
 
     app.a = [1, 2, 3, 4];
 
@@ -9,6 +10,7 @@
         var b = angular.element( document.querySelector( '.msgLoc' ) );
         var c = angular.element( document.querySelector( '.proLoc' ) );
         if(loc === 'home') {
+            location.reload();
             a.addClass('makeActive');
             b.removeClass('makeActive');
             c.removeClass('makeActive');
@@ -25,12 +27,10 @@
             b.removeClass('makeActive');
             c.removeClass('makeActive');
         }
-
     };
 
     $rootScope.$on('$routeChangeStart', function() {
         if(auth.isLoggedIn()) {
-            console.log('Success: user is logged in!');
                 app.isLoggedIn = true;
                 auth.getUser().then(function(data) {
                     app.loginUser = data.data.user;
@@ -44,7 +44,6 @@
                     }
                 });
         } else {
-            console.log('Failure: user is not logged in!');
             app.isLoggedIn= false;
             app.firstName = '';
             if(!(location.href === 'http://localhost:8080/login' || location.href == 'http://localhost:8080/register')) {
@@ -121,5 +120,6 @@
         }).catch((err) => {
             console.log(err);
         });
-    }
+    };
+
 });
