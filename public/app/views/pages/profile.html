@@ -13,7 +13,7 @@
                 <img src="{{userDetails.profile? ('../../../media/' + userDetails.profile) : ('../../../assets/images/default-profile.jpg')}}" alt="profile photo" class="rounded-circle">
             </div>
             <ul class="nav col-sm-6 p-0 m-0" id="p-nav">
-                <li class="nav-link btn btn-outline-light" style="border-bottom: 2px solid #55CDFC;">
+                <li class="nav-link btn btn-outline-light" >
                     <a href="#" ng-click="section = 'timeline'">Timeline</a>
                 </li>
                 <li class="nav-link btn btn-outline-light">
@@ -39,29 +39,34 @@
             </ul>
         </div>
     </div>
-
-    <div id="p-main-body" class="row mx-0">
-        <div id="p-user-details" class="col-sm-3">
+ <!--user details right side-->
+ 
+    <div id="p-main-body" class="row  mx-0 p-3 mt-0">
+        <div id="p-user-details" class="col-sm-3 " style="margin-top: 12px ;" >
+            <div class="bg-white p-2">
             <h4 style="color: #55CDFC ;">{{ userDetails.fullName }}</h4>
+           <hr>
             <ul>
-                <li><span class="fa fa-briefcase"></span>{{ userDetails.work }}</li>
-                <li><span class="fa fa-home"></span>{{ userDetails.currentLoc }}</li>
-                <li><span class="fa fa-birthday-cake"></span>{{ userDetails.DOB }}</li>
-                <li><span class="fa fa-calendar"></span>{{ userDetails.joinedDate }}</li>
+                <li class="mb-1"><span class="fa fa-briefcase"></span>{{ userDetails.work }}</li>
+                <li class="mb-1"><span class="fa fa-home"></span>{{ userDetails.currentLoc }}</li>
+                <li class="mb-1"><span class="fa fa-birthday-cake"></span>{{ userDetails.DOB }}</li>
+                <li class="mb-1"><span class="fa fa-calendar"></span>{{ userDetails.joinedDate }}</li>
             </ul>
         </div>
+        </div>
 
-
+   
         <!-- Timeline Section -->
-        <div ng-show="section === 'timeline'" class="col-sm-6" ng-controller="postCtrl">
+        <div ng-show="section === 'timeline'" class="col-sm-6 mt-2" ng-controller="postCtrl">
             <div ng-show="main._id===userDetails._id">
-                <form name="form" enctype="multipart/form-data">
-                    <input style="border-radius: 10px; width: 20em;height: 2em;" type="text" ng-model="newPost.description" placeholder="Write Something...">
-                    <span class="fa fa-image" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
+                <form name="form" enctype="multipart/form-data" class="bg-white ">
+                    <input style="border-radius: 10px; width: 20em;height: 2em; margin-left: 5px;" type="text" ng-model="newPost.description" placeholder="Write Something...">
+                    <span style="margin-right: 5px;" class="fa fa-image" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
                         ngf-accept="'image/*'"></span>
                     <button class="btn btn-info" type="submit" ng-click="submit()">Post</button>
                 </form>
             </div>
+            <hr>
             <div>
                 <div ng-repeat="post in posts" style="background-color: white;" class="rounded mb-3">
                     <div class="row" style="padding: 10px;">
@@ -114,33 +119,41 @@
 
 
         <!-- About Section -->
-        <div ng-show="section === 'about'">
+        <div ng-show="section === 'about'" class="col-8 bg-white mt-2 " style="border-radius: 10px;" >
+            <div>
+                    <h2>   <strong>            
+                 <i class="fa fa-user-circle-o" style="font-size:34px">
+                </i>
+                About </strong></h2> 
+            </div>
+
+                <hr>
             
             <div>
-                <h4>Personal Information</h4>
+               <h4> <strong> Personal Information </strong></h4>
                 <div>
                     <p>First Name {{ userDetails.firstName }}</p>
                     <p>Last Name {{ userDetails.lastName }}</p>
                 </div>
             </div>
-
+                    <hr>
             <div>
-                <h4>Contact Information</h4>
+                <h4 > <strong> Contact Information</strong></h4>
                 <div>
                     <p>Email {{ userDetails.email }}</p>
                     <p>Phone {{ userDetails.phone }}</p>
                 </div>
             </div>
-
+                    <hr>
             <div>
-                <h4>Education</h4>
+                <h4 ><strong> Education</strong></h4>
                 <div>
                     <p>Study {{ userDetails.education }}</p>
                 </div>
             </div>
-
+                <hr>
             <div>
-                <h4>Location</h4>
+                <h4 ><strong> Location</strong></h4>
                 <div>
                     <p>Hometown {{ userDetails.hometown }}</p>
                     <p>Current Location {{ userDetails.currentLoc }}</p>
@@ -157,18 +170,19 @@
                 <div ng-repeat="user in followingUsers" class="col-sm-4 m-0 p-0">
                     <div style="height: 300px;" class="bg-white ml-2 mt-2">
                         <div class="">
-                            <img style="width: 100%; height: 100px;" ng-src="{{user.followed.cover? ('../../../media/' + user.followed.cover) : ('../../../assets/images/default-cover.jpg')}}" alt="cover">
+                            <img style="width: 100%; height: 100px;height: 100px; margin: 0px 0px -30px 0px;" ng-src="{{user.followed.cover? ('../../../media/' + user.followed.cover) : ('../../../assets/images/default-cover.jpg')}}" alt="cover">
                         </div>
                         <div class="row">
                             <div class="col-7">
-                                <img ng-src="{{user.followed.profile? ('../../../media/' + user.followed.profile) : ('../../../assets/images/default-profile.jpg')}}" alt="profile avatar" style=" height: 50px;" class="rounded-circle">
+                                <img ng-src="{{user.followed.profile? ('../../../media/' + user.followed.profile) : ('../../../assets/images/default-profile.jpg')}}" alt="profile avatar" style=" height: 70px; margin-left: 20px;" class="rounded-circle">
                             </div>
-                            <div class="col-5">
-                                <button style="border-radius: 20px;" class="btn btn-outline-secondary" ng-click="followedBtn(userProfileId , user.followed._id, $index)"  type="submit">{{ user.followed.followBtn }}</button>
+                            <div class="col-5 m-0 p-0">
+                                <button style="border-radius: 20px; height: 30px;" class="btn btn-outline-secondary mt-5 pt-0" ng-click="followedBtn(userProfileId , user.followed._id, $index)"  type="submit">{{ user.followed.followBtn }}</button>
                             </div>
                         </div>
-                        <div>
-                            <a style="font-weight: bold" href="/profile/{{user.followed._id}}">{{ user.followed.fullName }}</a>
+                        
+                        <div style=" margin-left:20px; margin-top: 10;">
+                            <a  href="/profile/{{user.followed._id}}">{{ user.followed.fullName }}</a>
                             <p>{{ user.followed.work }}</p>
                             <p>{{ user.followed.status }}</p>
                         </div>
@@ -185,17 +199,17 @@
                 <div ng-repeat="user in followerUsers" class="col-sm-4 m-0 p-0">
                     <div style="height: 300px;" class="bg-white ml-2 mt-2">
                         <div class="">
-                            <img style="width: 100%; height: 100px;" ng-src="{{user.follower.cover? ('../../../media/' + user.follower.cover) : ('../../../assets/images/default-cover.jpg')}}" alt="cover">
+                            <img style="width: 100%; height: 100px; margin: 0px 0px -30px 0px;" ng-src="{{user.follower.cover? ('../../../media/' + user.follower.cover) : ('../../../assets/images/default-cover.jpg')}}" alt="cover">
                         </div>
                         <div class="row">
                             <div class="col-7">
-                                <img ng-src="{{user.follower.profile? ('../../../media/' + user.follower.profile) : ('../../../assets/images/default-profile.jpg')}}" alt="profile avatar" style=" height: 50px;" class="rounded-circle">
+                                <img ng-src="{{user.follower.profile? ('../../../media/' + user.follower.profile) : ('../../../assets/images/default-profile.jpg')}}" alt="profile avatar" style=" height: 70px; margin-left: 20px;" class="rounded-circle">
                             </div>
-                            <div class="col-5">
-                                <button style="border-radius: 20px;" class="btn btn-outline-secondary" ng-click="followerBtn(userProfileId , user.follower._id, $index)"  type="submit">{{ user.follower.followBtn }}</button>
+                            <div class="col-5 m-0 p-0">
+                                <button style="border-radius: 20px;height: 30px;" class="btn btn-outline-secondary mt-5 pt-0" ng-click="followerBtn(userProfileId , user.follower._id, $index)"  type="submit">{{ user.follower.followBtn }}</button>
                             </div>
                         </div>
-                        <div>
+                        <div style=" margin-left:20px; margin-top: 10;">
                             <a style="font-weight: bold" href="/profile/{{user.follower._id}}">{{ user.follower.fullName }}</a>
                             <p>{{ user.follower.work }}</p>
                             <p>{{ user.follower.status }}</p>
@@ -210,8 +224,8 @@
         <!-- Photos Section -->
         <div ng-show="section === 'photos'" class="col-sm-9">
             <div class="row">
-                <div class="col-sm-4" ng-repeat="media in userPostsMedia">
-                    <img style="width: 100%;" ng-src="{{ '../../../media/' + media.media.filename }}" alt="user post image">
+                <div class="col-sm-3 bg-white m-2" ng-repeat="media in userPostsMedia">
+                    <img style="width: 98%;" ng-src="{{ '../../../media/' + media.media.filename }}" alt="user post image">
                 </div>
             </div>
         </div>

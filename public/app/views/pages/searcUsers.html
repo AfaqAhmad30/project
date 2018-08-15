@@ -5,10 +5,12 @@
     <div class="container">
         <div class="row">
             <!-- Left portion of user profile -->
-            <div class="col-sm-3 bg-light"> 
-                <h5  style="font-weight: bolder"> To follow...</h5>
+            <div class="col-sm-3 p-0 "> 
+                <div style="background-color: #ffffff; padding: 5px;">
                 
-                <div class="row pb-3" ng-repeat="x in main.a" style="background-color: #ffffff;">
+                    <h5  style="font-weight: bolder"> To follow...</h5>
+                <hr>
+                <div class="row pb-3" ng-repeat="x in main.a" >
                         
                     <div class= "col-sm-3">
                         <img style="height: 50px;" class="rounded-circle" src="{{user.profile? ('../../../media/' + user.profile) : ('../../../assets/images/default-profile.jpg')}}" alt="dp">
@@ -17,12 +19,12 @@
                     <div >
                         
                         <h6><strong> Saleh Banoori</strong></h6>
-                        <button class="btn btn-secondary btn-sm p-0 m-0 px-3" style="border-radius: 20px; height: 25px;">Follow</button>
+                        <button class="btn btn-secondary btn-sm p-0 m-0 px-2" style="border-radius: 20px; height: 25px;">Follow</button>
                     </div>
                    
                         
                 </div>
-            
+            </div>
             </div>
            
         
