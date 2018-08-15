@@ -13,7 +13,7 @@
                 <img src="{{userDetails.profile? ('../../../media/' + userDetails.profile) : ('../../../assets/images/default-profile.jpg')}}" alt="profile photo" class="rounded-circle">
             </div>
             <ul class="nav col-sm-6 p-0 m-0" id="p-nav">
-                <li class="nav-link btn btn-outline-light" style="border-bottom: 2px solid #55CDFC;">
+                <li class="nav-link btn btn-outline-light">
                     <a href="#" ng-click="section = 'timeline'">Timeline</a>
                 </li>
                 <li class="nav-link btn btn-outline-light">
@@ -33,9 +33,6 @@
                 <li ng-show="userProfileId === loginUserId" class="nav-link align-middle  btn btn-outline-light">
                     <a href="/profileEdit">Edit Profile</a>
                 </li>
-                <!-- <li class="nav-link align-middle  btn btn-outline-light">
-                    <a href="/profileEdit">Follow</a>
-                </li> -->
             </ul>
         </div>
     </div>

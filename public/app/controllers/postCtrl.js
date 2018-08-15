@@ -1,7 +1,7 @@
 
 angular.module('postControllers', ['ngFileUpload'])
 
-.controller('postCtrl', ['$scope', '$http','Upload', '$routeParams', '$location', '$rootScope', function($scope, $http, Upload, $routeParams, $location, $rootScope) {
+.controller('postCtrl', ['$scope', '$http', 'Upload', '$routeParams', '$location', '$rootScope', function($scope, $http, Upload, $routeParams, $location, $rootScope) {
 
     var userData = {
         author: $routeParams.userId

@@ -1,7 +1,16 @@
 <div class="container" ng-controller="proUpdateCtrl">
     <div>
         <img style="width: 100%; max-height: 300px;" ng-src="{{userData.cover? ('../../../media/' + userData.cover) : ('../../../assets/images/default-cover.jpg')}}" alt="cover">
-        
+        <div class="row bg-white m-0 p-0 mt-1">
+            <form name="form1" enctype="multipart/form-data">
+                <span style="font-size: 3em;" class="fa fa-edit mt-2 ml-3" ngf-select ng-model="cover" name="cover" ngf-pattern="'image/*'" ngf-accept="'image/*'"></span>
+                <button class="btn btn-success m-0 ml-2" style="position: relative; top: -12px;" type="submit" ng-click="updateCover()">Update Cover Photo</button>
+            </form>
+            <div class="alert alert-success alert-dismissible" ng-show="coverErrorMsg">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>{{ coverErrorMsg }} </strong>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-sm-7 bg-white m-0 mt-3 ml-3 p-0 rounded">
@@ -14,28 +23,38 @@
                     </div>
                     <div class="row m-0">
                         <input type="email" ng-model="userData.email" class="form-control col-sm-5 ml-4 mb-4" aria-describedby="emailHelp" placeholder="Email">
-                        <input type="number" ng-model="userData.phone" class="form-control col-sm-5 ml-4 mb-4" placeholder="Phone Number">
+                        <input type="text" ng-model="userData.phone" class="form-control col-sm-5 ml-4 mb-4" placeholder="Phone Number">
                     </div>
                     <div class="row m-0">
                         <input type="text" ng-model="userData.education" class="form-control col-sm-5 ml-4 mb-4" placeholder="Education">
                         <input type="date" ng-model="userData.DOB" class="form-control col-sm-5 ml-4 mb-4" placeholder="Date of Birth">
                     </div>
-                    <input style="width: 88%" type="text" ng-model="userData.work" class="form-control ml-4 mb-4" placeholder="Work">
+                    <input style="width: 87%" type="text" ng-model="userData.work" class="form-control ml-4 mb-4" placeholder="Work">
                     <div class="row m-0">
                         <input type="text" ng-model="userData.currentLoc" class="form-control col-sm-5 ml-4 mb-4" placeholder="Current Location">
                         <input type="text" ng-model="userData.hometown" class="form-control col-sm-5 ml-4 mb-4" placeholder="Hometown">
                     </div>
-                    <input style="width: 88%;" type="text" ng-model="userData.status" class="form-control ml-4 mb-4" placeholder="Status">
+                    <input style="width: 87%;" type="text" ng-model="userData.status" class="form-control ml-4 mb-4" placeholder="Status">
                 </div>
                 <div class="row m-0">
-                    <button  class="btn btn-success ml-4 mb-4" ng-click="updateProfile()">Update</button>
-                    <button class="btn btn-danger ml-4 mb-4">Cancel</button>
+                    <button  class="btn btn-success ml-4 mb-4" ng-click="updateProfile()">Update Details</button>
+                    <div class="alert alert-success alert-dismissible ml-4 mb-4" ng-show="userData.message">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Profile Details has been {{ userData.message }} </strong>
+                    </div>
                 </div>
               </form>
         </div>
-        <div class="col-sm-4 ml-5" style="position: relative; top: 50px;">
-            <img style="width: 240px;" class="rounded-circle" ng-src="{{userData.profile? ('../../../media/' + userData.profile) : ('../../../assets/images/default-profile.jpg')}}" alt="profile">
-            <span class="fa fa-edit" style="position: relative;"></span>
+        <div class="col-sm-4 ml-3 mt-3 p-5 rounded bg-white">
+            <img style="width: 240px;" class="rounded-circle ml-4" ng-src="{{userData.profile? ('../../../media/' + userData.profile) : ('../../../assets/images/default-profile.jpg')}}" alt="profile">
+            <form name="form2" enctype="multipart/form-data">
+                <span style="font-size: 3em;" class="fa fa-edit mt-5 ml-4" ngf-select ng-model="dp" name="dp" ngf-pattern="'image/*'" ngf-accept="'image/*'"></span>
+                <button style="position: relative; top: -13px;" class="btn btn-success ml-3" type="submit" ng-click="updateDP()">Update Profile Picture</button>
+            </form>
+            <div class="alert alert-success alert-dismissible" ng-show="dpErrorMsg">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>{{ dpErrorMsg }} </strong>
+            </div>
         </div>
     </div>
 </div>

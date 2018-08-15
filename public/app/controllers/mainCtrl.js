@@ -1,5 +1,5 @@
  angular.module('mainController', ['authServices'])
-.controller('mainCtrl', function(auth, $timeout, $location, $rootScope, $http){
+.controller('mainCtrl', function(auth, $timeout, $location, $rootScope, $http, $scope){
     var app = this;
     app.loginUser = {};
 
@@ -10,7 +10,7 @@
         var b = angular.element( document.querySelector( '.msgLoc' ) );
         var c = angular.element( document.querySelector( '.proLoc' ) );
         if(loc === 'home') {
-            location.reload();
+            // location.reload();
             a.addClass('makeActive');
             b.removeClass('makeActive');
             c.removeClass('makeActive');
@@ -122,4 +122,12 @@
         });
     };
 
+    this.getFol = function(userId) {
+        // console.log(userId)
+        $http.post('/api/getFol', {userId: userId}).then((totalFollowers) => {
+            console.log(totalFollowers);
+        }).catch((err) => {
+            console.log(err);
+        });
+    };
 });

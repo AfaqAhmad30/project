@@ -161,8 +161,42 @@ module.exports = function(router) {
 
     // update user profile
     router.post('/updateUserProfile', (req, res) => {
-        // user.findOneAndUpdate({_id: req.body.userData})
-    })
+        user.findOneAndUpdate({_id: req.body._id}, {$set: {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            fullName: req.body.firstName + ' ' + req.body.lastName,
+            DOB: req.body.DOB,
+            email: req.body.email,
+            phone: req.body.phone,
+            education: req.body.education,
+            currentLoc: req.body.currentLoc,
+            hometown: req.body.hometown,
+            work: req.body.work,
+            status: req.body.status
+        }}, {new: true}).then((resp) => {
+            res.json({message: 'updated'});
+        }).catch((err) => {
+            res.json(err);
+        });
+    });
+
+    // update profile picture
+    router.post('/updateDP', upload.single('file'), (req, res) => {
+        user.findOneAndUpdate({_id: req.body.userId}, {$set: {profile: req.file.filename}}, {new: true}).then((resp) => {
+            res.json(resp);
+        }).catch((err) => {
+            res.json(err);
+        });
+    });
+
+    // update cover picture
+    router.post('/updateCover', upload.single('file'), (req, res) => {
+        user.findOneAndUpdate({_id: req.body.userId}, {$set: {cover: req.file.filename}}, {new: true}).then((resp) => {
+            res.json(resp);
+        }).catch((err) => {
+            res.json(err);
+        });
+    });
 
     //Search Users
     router.post('/search', function(req, res){
@@ -227,6 +261,17 @@ module.exports = function(router) {
     router.post('/getFollower', (req, res) => {
         Follow.find({followed: req.body.followed}).populate('follower').sort({_id: -1}).exec().then((resp) => {
             res.json(resp);
+        }).catch((err) => {
+            res.json(err);
+        });
+    });
+
+
+    // get totalFollower for login user
+    router.post('/getFol', (req, res) =>{
+        console.log(req.body);
+        Follow.find({followed: req.body.userId}).exec().then((followers) => {
+            res.json(followers);
         }).catch((err) => {
             res.json(err);
         });
