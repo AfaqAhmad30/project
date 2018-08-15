@@ -71,12 +71,13 @@
                         <img src="{{post.author.profile? ('../../../media/' + post.author.profile) : ('../../../assets/images/default-profile.jpg')}}" alt="profile avatar" style="margin-left: 10px; height: 50px;" class="rounded-circle">
                     </div>
                     <div class="col-10" style="margin-left: 20px;">
-                        <div>
-                            <h6>{{ post.author.fullName}}</h6>
-                            <p><small>{{ post.time }}</small></p>
+                        <div class=" ">
+                            <h6 class="mb-0">{{ post.author.fullName}}</h6>
+                            <p class="mb-0"><small>{{ post.time }}</small></p>
                         </div>
+                       <br>
                         <div>
-                            <p>{{ post.description }}</p>
+                           <strong> <h5>{{ post.description }}</h5> </strong>
                             <img ng-src="../../../media/{{post.media.filename}}" style="width: 100%;">
                             <div>
                                 <div>
@@ -89,19 +90,38 @@
                                 <br>
                                 <div ng-show="showHideComment">
                                     <div class="row">
-                                        <div class="col-1"><img src="../../../assets/images/default-profile.jpg" alt="" style="width: 30px;" class="rounded-circle"></div>
-                                        <div class="col-8"><input type="text" placeholder="Comment here" ng-model="post.comment"></div>
-                                        <div class="col-1"><input type="submit" value="comment" ng-click="placeComment(post._id, main._id, $index)"></div>
+                                        <div class="col-1 "><img src="../../../assets/images/default-profile.jpg" alt="" style="width: 35px;" class="rounded-circle"></div>
+                                       
+                                        <div class="col-8 mb-3 ">
+                                            <input  style="border-radius: 20px; height: 30px;" type="text" placeholder="Comment here" ng-model="post.comment">
+                                            <input class="btn btn-outline-info btn-sm" style="border-radius: 20px;" type="submit" value="comment" ng-click="placeComment(post._id, main._id, $index)">
+                                       
+                                        </div>
+                                        <hr>
+                                        <div class="col-1">
+                                            
+                                        </div>
                                     </div>
                                     <div class="row" ng-repeat="comment in post.comments">
                                         <div class="col-sm-1">
-                                            <img src="../../../assets/images/default-profile.jpg" alt="" style="width: 30px;" class="rounded-circle">
+                                        <img src="../../../assets/images/default-profile.jpg" alt="" style="width: 35px;" class="rounded-circle">
+                                        
                                         </div>
-                                        <div class="col-sm-8">
-                                            <p>{{ comment.userId.firstName + ' ' + comment.userId.lastName }}</p>
+                                        
+                                        <div class="col-sm-8  mb-3">
+                                            <p class="m-0">{{ comment.userId.firstName + ' ' + comment.userId.lastName }}</p>
                                             <small>{{ comment.commentedOn }}</small>
-                                            <p>{{ comment.commentedText }}</p>
-                                            <button ng-click="deleteComment(comment._id, $parent.$index, $index)">delete</button>
+                                            
+                                           <div class="row">
+                                                <div class="col-sm-8 m-0">
+                                                        <h5>{{ comment.commentedText }}
+                                                    <button class="btn btn-light btn-sm fa fa-trash float-right p-1 " ng-click="deleteComment(comment._id, $parent.$index, $index)"> </button></h5>
+                                                </div>
+
+                                           </div>
+                                           
+                                           
+                                            
                                         </div>
                                     </div>
                                 </div>
