@@ -120,6 +120,16 @@ module.exports = function(router) {
         });
     });
 
+    // delete post
+    router.post('/post/deletePost', (req, res) => {
+        console.log(req.body);
+        Post.findByIdAndRemove(req.body._id).then((resp) => {
+            res.json(resp);
+        }).catch((err) => {
+            res.json(err);
+        });
+    });
+
     var ids = [];
     // Get all post to timeline
     router.post('/posts', (req, res) => {
@@ -282,15 +292,22 @@ module.exports = function(router) {
 
 
     // get totalFollower for login user
-    router.post('/getFol', (req, res) =>{
-        console.log(req.body);
+    router.post('/totalFollowers', (req, res) =>{
         Follow.find({followed: req.body.userId}).exec().then((followers) => {
-            res.json(followers);
+            res.json(followers.length);
         }).catch((err) => {
             res.json(err);
         });
     });
 
+    // get totalFollowing for login user
+    router.post('/totalFollowing', (req, res) =>{
+        Follow.find({follower: req.body.userId}).exec().then((followed) => {
+            res.json(followed.length);
+        }).catch((err) => {
+            res.json(err);
+        });
+    });
 
     // get user posts images
     router.post('/getPostsImages', (req, res) => {
@@ -302,20 +319,29 @@ module.exports = function(router) {
     });
 
 
-    // User like a post
+    // User like or unlike a post
     router.post('/postLiked', (req, res) => {
-        var like = new Like();
-        like.postId = req.body.postId;
-        like.userId = req.body.userId;
-        like.save().then((result) => {
-            res.json(result);
+        Like.findOne({postId: req.body.postId, userId: req.body.userId}).exec().then((result) => {
+            if(result) {
+                Like.findByIdAndRemove(result._id).exec().then((unlike) => {
+                    res.json({message: 'post unlike'});
+                });
+            } else {
+                var like = new Like();
+                like.postId = req.body.postId;
+                like.userId = req.body.userId;
+                like.save().then((like) => {
+                    res.json({message: 'post like'});
+                });
+            }
         }).catch((err) => {
-            res.json(err);
-        });
+            res.json({message: 'Error in post like'});
+        })
     });
 
-    router.post('/post/likes', (req, res) => {
-        Like.find({postId: req.body._id}).exec().then((result) => {
+    // get total likes for a post
+    router.post('/post/getLikes', (req, res) => {
+        Like.find({postId: req.body.postId}).exec().then((result) => {
             res.json(result);
         }).catch((err) => {
             res.json(err);
@@ -361,16 +387,6 @@ module.exports = function(router) {
             res.json(err);
         });
     });
-
-
-
-    // get random users
-    // router.get('/getRandomUsers', (req, res) => {
-    //     user.findRandom().limit(10).exec(function(err, users) {
-    //         res.json(users);
-    //     });
-    // });
-
 
     return router;
 };

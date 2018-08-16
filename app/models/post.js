@@ -18,12 +18,7 @@ var postSchema = Schema({
     media: {
         filename: String,
         path: String
-    },
-    likes: {
-        type: Number,
-        default: 0
     }
-    
 });
 
 var Post = mongoose.model('post', postSchema);

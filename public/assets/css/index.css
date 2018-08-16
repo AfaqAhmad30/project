@@ -4,15 +4,6 @@
     height: 45px;
     
 }
-#img {
-    
-    width: 35px;
-   display: block;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    margin-top: 0px;
-       
-}
 
 #list li a {
   color: rgb(66, 66, 66);

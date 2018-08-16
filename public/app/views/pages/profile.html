@@ -30,7 +30,7 @@
                 </li>
             </ul>
             <ul class="nav col-sm-3">
-                <li ng-show="userProfileId === loginUserId" class="nav-link align-middle  btn btn-outline-light">
+                <li ng-show="userProfileId === loginUserId" class="nav-link align-middle btn btn-outline-light my-2 pt-0" style="border: 1px solid #55CDFC; border-radius: 21px;">
                     <a href="/profileEdit">Edit Profile</a>
                 </li>
             </ul>
@@ -72,14 +72,26 @@
             </div>
             <div>
                 <div ng-repeat="post in posts" style="background-color: white;" class="rounded mb-3">
-                    <div class="row" style="padding: 10px;">
+                    <div class="row" style="padding: 15px;">
                         <div class="col-1">
                             <img src="{{post.author.profile? ('../../../media/' + post.author.profile) : ('../../../assets/images/default-profile.jpg')}}" alt="profile avatar" style="margin-left: 10px; height: 50px;" class="rounded-circle">
                         </div>
                         <div class="col-10" style="margin-left: 20px;">
-                            <div class="mt-2">
-                                <h6 class="post-user-name">{{ post.author.fullName}}</h6>
-                                <p><small>{{ post.time }}</small></p>
+                            <div class="mt-1 row">
+                                <div class="col-10">
+                                    <h6 class="post-user-name">{{ post.author.fullName}}</h6>
+                                    <p><small>{{ post.time }}</small></p>
+                                </div>
+                                <div class="col-2" ng-show="post.author._id === loginUserId">
+                                    <div class="dropdown">
+                                        <button class="btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          <span style="color: rgb(151, 153, 155)" class="fa fa-ellipsis-v"></span>
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                          <a class="dropdown-item" ng-click="deletePost(post._id, $index)" href="#">Delete</a>
+                                        </div>
+                                      </div>
+                                </div>
                             </div>
                             <hr>
                             <div>

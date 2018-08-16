@@ -28,10 +28,12 @@
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/animate.css">
 
+    <!-- For dropdown buttons -->
+    <script src="/assets/js/popper.min.js"></script>
+
     <!-- Angularjs -->
     <script src="/assets/js/angular.js"></script>
     <script src="/assets/js/angular-route.js"></script>
-    <script src="/assets/js/angular-ui-router.js"></script>
 
     <!-- ng-file-upload -->
     <script src="/assets/js/ng-file-upload-shim.min.js"></script> <!-- for no html5 browsers support -->
@@ -59,14 +61,10 @@
 
   <body ng-app="myApp" ng-controller="mainCtrl as main" style="background-color: #E6ECF0">
 
-    
-        
         <nav ng-show="main.isLoggedIn"  class="navbar navbar-icon-top navbar-expand-lg navbar-light font-weight-bold p-0 sticky-top "style="background-color: #FFFFFF; !imortant ">
-
-         
         
-          <div class=" container collapse navbar-collapse  p-0" id="navbarSupportedContent" >
-            <ul class="navbar-nav mr-auto" id="list">
+          <div class=" container collapse navbar-collapse" id="navbarSupportedContent" >
+            <ul class="navbar-nav" id="list">
              
               <li class="nav-item">
                   <a ng-show="main.isLoggedIn" class="nav-link homeLoc" ng-click="main.doActive('home');" href="/">
@@ -74,48 +72,38 @@
                     Home</a>
                 </li>
                
-              <li class="nav-item ">
+              <li class="nav-item mx-2">
                 <a ng-show="main.isLoggedIn" class="nav-link msgLoc" ng-click="main.doActive('messages')" href="/messages">
-                  <i class="fa fa-envelope-o"> </i>
+                  <i class="fa fa-envelope"> </i>
                   Messages
                 </a>
               </li>
 
-
               <li class="nav-item ">
-                  <a ng-show="main.isLoggedIn" class="nav-link proLoc" ng-click="main.doActive('profile')" href="/profile/{{ main._id }}">{{ main.firstName }}</a>
+                  <a ng-show="main.isLoggedIn" class="nav-link proLoc" ng-click="main.doActive('profile')" href="/profile/{{ main._id }}"><span class="fa fa-user mr-1"></span>{{ main.firstName }}</a>
               </li>
             </ul>
 
       
-              <div id="img">
-                  <a   class="navbar-brand  align-text-top" href="/"> <img id="img" src="../../assets/icons/logo/n-logo.png" alt="logo"> </a>
+              <div class="mx-auto">
+                  <a class="navbar-brand align-text-top" href="/"> <img style="width: 30px;" src="../../assets/icons/logo/n-logo.png" alt="logo"> </a>
               </div>
             
           <div>
             <form class="form-inline" >
-               
-                  <input type="text"  class="form-control search-bar mr-sm-1" ng-model="main.searchValue" placeholder="Search" aria-label="Search">
+                  <input type="text" style="width: 230px; height: 30px; background-color: #F5F8FA; font-size: 14px;" class="form-control search-bar mr-sm-1" ng-model="main.searchValue" placeholder="Search" aria-label="Search">
                   <a ng-href="{{ main.searchValue===''? '#' : '/search' }}" ng-click="main.searchUser()" id="searchIcon"><span class="fa fa-search"></span></a>
-                 
             </form>
           </div>
             
-            <ul class="nav navbar-nav navbar-right" id="list">
-        
-                <li class="nav-item  ml-5"> 
-                    
-                  <a ng-show="main.isLoggedIn" class="nav-link " href="#" ng-click="main.logout()">
-                    <i class="fa fa-lock"> </i>
-                    Logout
-                  </a>
-                   
+            <ul class="nav navbar-nav navbar-right ml-2" id="list">
+                <li class="nav-item"> 
+                  <a ng-show="main.isLoggedIn" class="nav-link" href="#" ng-click="main.logout()">
+                    <i class="fa fa-power-off mr-1"></i>Logout</a>
                 </li>
-              
             </ul>
           </div>
         </nav>
-        
 
     <div ng-view></div>
 

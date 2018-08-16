@@ -2,8 +2,6 @@ angular.module('homeControllers', ['ngFileUpload'])
 
 .controller('homeCtrl', ['$scope', '$http', 'Upload', '$rootScope', function($scope, $http, Upload, $rootScope) {
 
-    
-
     var userData = {
         author: $rootScope.loginUserId,
         page: 'home'
@@ -34,60 +32,17 @@ angular.module('homeControllers', ['ngFileUpload'])
                 comments.data.forEach(function(comment) {
                     comment.commentedOn = moment(comment.commentedOn).fromNow();
                 })
-            }).catch((err) => {
-                console.log(err);
             });
 
             // getting likes of current post
-            // $http.post('api/post/likes', {_id: post._id}).then((result) => {
-            //     result.data.forEach(function(like) {
-            //         if(like.userId === userData.author) {
-            //             post.imgsrc = '../../../assets/icons/like/liked.png';
-            //         }
-            //     });
-            // }).catch((err) => {
-            //     console.log(err);
-            // });
+            $http.post('api/post/getLikes', {postId: post._id}).then((likes) => {
+                post.likes = likes.data.length;
+            });
 
         });
     }).catch((err) => {
         console.log(err);
     }); // End of getting all posts
-
-
-    // add new post to user profile
-    $scope.newPost = {};
-    $scope.newPost.author = userData.author;
-    $scope.newPost.description = '';
-    
-    $scope.submit = function() {
-        if ($scope.form.file.$valid && $scope.file) {
-            $scope.upload($scope.file);
-        }
-    };
-
-    // upload on file select or drop
-    $scope.upload = function (file) {
-        Upload.upload({
-            url: 'api/newPost',
-            data: {file: file, newPost: $scope.newPost}
-        }).then(function (resp) {
-            console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-            console.log(resp);
-            $http.post('/api/posts', userData).then((posts) => {
-                posts.data[0].time = moment(posts.data[0].time).fromNow();
-                $scope.homePosts.unshift(posts.data[0]);
-            }).catch((err) => {
-                console.log(err);
-            });
-
-        }, function (resp) {
-            console.log('Error status: ' + resp.status);
-        }, function (evt) {
-            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-        });
-    };
 
 
     // comment insertion
@@ -115,15 +70,42 @@ angular.module('homeControllers', ['ngFileUpload'])
             console.log(err);
         });
     };
-    
 
-    // $scope.postLiked = (postId, userId, index) => {
-    //     $http.post('/api/postLiked', { postId: postId, userId: userId }).then((resp) => {
-    //         // $scope.homePosts[index]
-    //     }).catch((err) => {
-    //         console.log(err);
-    //     })
-    // };
+    // delete post
+    $scope.deletePost = function(postId, index) {
+        $http.post('/api/post/deletePost', {_id: postId}).then((resp) => {
+            $scope.homePosts.splice(index, 1);
+        }).catch((err) => {
+            console.log(err);
+        });
+    };
+
+    // like or unlike a post
+    $scope.postLiked = (postId, userId, index) => {
+        $http.post('/api/postLiked', { postId: postId, userId: userId }).then((resp) => {
+            if(resp.data.message === 'post like') {
+                $scope.homePosts[index].likes++;
+            } else {
+                $scope.homePosts[index].likes--;
+            }
+        }).catch((err) => {
+            console.log(err);
+        })
+    };
+
+    // total followes of login user
+    $http.post('/api/totalFollowers', {userId: $rootScope.loginUserId}).then((totalFollowers) => {
+        $scope.totalFollowersOfLoginUser = totalFollowers.data;
+    }).catch((err) => {
+        console.log(err);
+    });
+
+    // total following of login user
+    $http.post('/api/totalFollowing', {userId: $rootScope.loginUserId}).then((totalFollowing) => {
+        $scope.totalFollowingOfLoginUser = totalFollowing.data;
+    }).catch((err) => {
+        console.log(err);
+    });
 
 
 }]);

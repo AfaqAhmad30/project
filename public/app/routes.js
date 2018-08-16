@@ -1,38 +1,4 @@
-angular.module('appRoutes',['ngRoute', 'ui.router'])
-
-// .config(function($urlRouterProvider, $stateProvider, $locationProvider) {
-//     $urlRouterProvider.otherwise('/')
-//     $stateProvider
-//         .state('home', {
-//             url: '/',
-//             templateUrl: 'app/views/pages/home.html'
-//         })
-//         .state('profile', {
-//             url: '/profile/:userId',
-//             templateUrl: 'app/views/pages/profile.html'
-//         })
-//         .state('messages', {
-//             url: '/messages',
-//             templateUrl: 'app/views/pages/messages.html'
-//         })
-//         .state('registration', {
-//             url: '/register',
-//             templateUrl: 'app/views/pages/register.html',
-//             controller: 'regCtrl',
-//             controllerAs: 'register',
-//             access: {restricted: false}
-//         })
-//         .state('login', {
-//             url: '/login',
-//             templateUrl: 'app/views/pages/login.html',
-//             access: {restricted: false}
-//         });
-
-//         $locationProvider.html5Mode({
-//             enabled: true,
-//             requireBase: false
-//           });
-// });
+angular.module('appRoutes',['ngRoute'])
 
 .config(function($routeProvider,$locationProvider){
 

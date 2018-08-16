@@ -9,6 +9,7 @@ angular.module('profileControllers', [])
     $http.post('/api/getProfileDetails', { userProfileId: $scope.userProfileId }).then((result) => {
         $scope.userDetails = result.data;
         $scope.userDetails.DOB = monthNames[new Date(result.data.DOB).getMonth()] + ' ' + new Date(result.data.DOB).getDate() + ', ' + new Date(result.data.DOB).getFullYear();
+        $scope.userDetails.joinedDate = monthNames[new Date(result.data.joinedDate).getMonth()] + ' ' + new Date(result.data.joinedDate).getDate() + ', ' + new Date(result.data.joinedDate).getFullYear();
     }).catch((err) => {
         console.log(err);
     });
