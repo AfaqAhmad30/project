@@ -106,6 +106,20 @@ module.exports = function(router) {
         });
     });
 
+    // Adding new post without picture to user timeline
+    router.post('/newPostWithoutPic', (req, res) => {
+        var post = new Post();
+        post.author = req.body.newPost.author;
+        post.time = new Date().getTime();
+        post.description = req.body.newPost.description;
+        
+        post.save().then((result) => {
+            res.json(result);
+        }).catch((err) => {
+            res.json(err);
+        });
+    });
+
     var ids = [];
     // Get all post to timeline
     router.post('/posts', (req, res) => {

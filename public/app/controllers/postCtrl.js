@@ -53,6 +53,15 @@ angular.module('postControllers', ['ngFileUpload'])
     $scope.submit = function() {
         if ($scope.form.file.$valid && $scope.file) {
             $scope.upload($scope.file);
+        } else {
+            $http.post('/api/newPostWithoutPic', {newPost: $scope.newPost}).then((resp) => {
+                $http.post('/api/posts', userData).then((posts) => {
+                    posts.data[0].time = moment(posts.data[0].time).fromNow();
+                    $scope.posts.unshift(posts.data[0]);
+                });
+            }).catch((err) => {
+
+            })
         }
     };
 
