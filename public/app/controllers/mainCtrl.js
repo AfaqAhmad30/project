@@ -1,7 +1,6 @@
  angular.module('mainController', ['authServices'])
 .controller('mainCtrl', function(auth, $timeout, $location, $rootScope, $http, $scope){
     var app = this;
-    app.loginUser = {};
 
     app.a = [1, 2, 3, 4];
 
@@ -33,12 +32,11 @@
         if(auth.isLoggedIn()) {
                 app.isLoggedIn = true;
                 auth.getUser().then(function(data) {
-                    app.loginUser = data.data.user;
                     app.firstName = data.data.firstName;
                     app.lastName = data.data.lastName;
                     app.email = data.data.email;
                     app._id = data.data._id;
-                    $rootScope.loginUserId = app.loginUser._id;
+                    $rootScope.loginUserId = data.data._id;
                     if(location.href == 'http://localhost:8080/login' || location.href == 'http://localhost:8080/register'){
                     $location.path('/')
                     }

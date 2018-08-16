@@ -1,20 +1,30 @@
+angular.module('homeControllers', ['ngFileUpload'])
 
-angular.module('postControllers', ['ngFileUpload'])
+.controller('homeCtrl', ['$scope', '$http', 'Upload', '$rootScope', function($scope, $http, Upload, $rootScope) {
 
-.controller('postCtrl', ['$scope', '$http', 'Upload', '$routeParams', '$location', '$rootScope', function($scope, $http, Upload, $routeParams, $location, $rootScope) {
+    
 
     var userData = {
-        author: $routeParams.userId
+        author: $rootScope.loginUserId,
+        page: 'home'
     };
 
+    $scope.userDetails = {};
+
+    $http.post('/api/getProfileDetails', { userProfileId: userData.author }).then((result) => {
+        $scope.userDetails = result.data;
+    }).catch((err) => {
+        console.log(err);
+    });
+
     // Array for storing posts
-    $scope.posts = [];
+    $scope.homePosts = [];
 
     $scope.showHideComment = false;
 
     // Get all the post for user timeline
     $http.post('/api/posts', userData).then((posts) => {
-        $scope.posts = posts.data;
+        $scope.homePosts = posts.data;
         posts.data.forEach(function(post) {
             post.time = moment(post.time).fromNow();
 
@@ -66,7 +76,7 @@ angular.module('postControllers', ['ngFileUpload'])
             console.log(resp);
             $http.post('/api/posts', userData).then((posts) => {
                 posts.data[0].time = moment(posts.data[0].time).fromNow();
-                $scope.posts.unshift(posts.data[0]);
+                $scope.homePosts.unshift(posts.data[0]);
             }).catch((err) => {
                 console.log(err);
             });
@@ -86,12 +96,12 @@ angular.module('postControllers', ['ngFileUpload'])
         $http.post('/api/post/newComment', {
             postId: postId,
             userId: userId,
-            commentedText: $scope.posts[index].comment
+            commentedText: $scope.homePosts[index].comment
         }).then((result) => {
             $http.post('/api/post/getComment', {_id: result.data._id}).then((comment) => {
                 comment.data.commentedOn = moment(comment.data.commentedOn).fromNow();
-                $scope.posts[index].comments.push(comment.data);
-                $scope.posts[index].comment = '';
+                $scope.homePosts[index].comments.push(comment.data);
+                $scope.homePosts[index].comment = '';
             });
         }).catch((err) => {
             console.log(err);
@@ -100,7 +110,7 @@ angular.module('postControllers', ['ngFileUpload'])
 
     $scope.deleteComment = function(commentId, parentIndex, index) {
         $http.post('/api/post/deleteComment', {_id: commentId}).then((result) => {
-            $scope.posts[parentIndex].comments.splice(index, 1);
+            $scope.homePosts[parentIndex].comments.splice(index, 1);
         }).catch((err) => {
             console.log(err);
         });
@@ -109,7 +119,7 @@ angular.module('postControllers', ['ngFileUpload'])
 
     // $scope.postLiked = (postId, userId, index) => {
     //     $http.post('/api/postLiked', { postId: postId, userId: userId }).then((resp) => {
-    //         // $scope.posts[index]
+    //         // $scope.homePosts[index]
     //     }).catch((err) => {
     //         console.log(err);
     //     })
