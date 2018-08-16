@@ -2,7 +2,7 @@
     <div class="row">
 
         <!-- Left portion of Home -->
-        <div class="col-sm-3">
+        <div class="col-sm-3 p-0">
     
             <!-- Profile Portion -->
             <div id="profile-details">
@@ -23,10 +23,11 @@
     
             <!-- About Portion -->
             <div id="about-div">
-                <h6>About</h6>
+                <h5>About</h5>
                 <ul>
                     <li><span class="fa fa-briefcase mr-1"></span>at {{main.loginUser.work}}</li>
                     <li><span class="fa fa-home mr-1"></span> in {{main.loginUser.hometown}}</li>
+                    <li><span class="fa fa-home mr-1"></span> in {{main.loginUser.currentLoc}}</li>
                 </ul>
             </div>
     
@@ -40,14 +41,15 @@
                         <img src="{{post.author.profile? ('../../../media/' + post.author.profile) : ('../../../assets/images/default-profile.jpg')}}" alt="profile avatar" style="margin-left: 10px; height: 50px;" class="rounded-circle">
                     </div>
                     <div class="col-10" style="margin-left: 20px;">
-                        <div class=" ">
-                            <h6 class="mb-0">{{ post.author.fullName}}</h6>
+                        <div class="ml-2 mt-2">
+                            <h6 class="post-user-name mb-0">{{ post.author.fullName}}</h6>
                             <p class="mb-0"><small>{{ post.time }}</small></p>
                         </div>
-                       <br>
+                       <hr>
                         <div>
                            <strong> <h5>{{ post.description }}</h5> </strong>
                             <img ng-src="../../../media/{{post.media.filename}}" style="width: 100%;">
+                            <hr>
                             <div>
                                 <div>
                                     <a href="#" ng-click="postLiked(post._id, main._id, $index)"><span class="fa fa-thumbs-o-up m-2"></span></a>
@@ -101,10 +103,12 @@
             </div>
         </div>
 
-        <div class="col-sm-3 bg-light"> 
-                <h5  style="font-weight: bolder"> Who To follow...</h5>
-                
-                <div class="row pb-3" ng-repeat="x in main.a" style="background-color: #ffffff;">
+        <div class="col-sm-3 p-0" > 
+            <div class="bg-white p-3 rounded">
+                <h5  style="font-weight: bolder; ">People you may know</h5>
+           
+                <hr>    
+                <div class="row pb-3" ng-repeat="x in main.a" >
                         
                     <div class= "col-sm-3">
                         <img style="height: 50px;" class="rounded-circle" src="{{user.profile? ('../../../media/' + user.profile) : ('../../../assets/images/default-profile.jpg')}}" alt="dp">
@@ -112,15 +116,15 @@
                  
                     <div >
                         
-                        <h6><strong> Saleh Banoori</strong></h6>
-                        <button class="btn btn-secondary btn-sm p-0 m-0 px-3" style="border-radius: 20px; height: 25px;">Follow</button>
+                        <h6> Saleh Banoori</h6>
+                        <button class="btn btn-secondary btn-sm p-0 m-0 px-2" style="border-radius: 20px; height: 25px;">Follow</button>
                     </div>
                    
                         
                 </div>
             
             </div>
-           
+        </div> 
         <!-- Right portion of Home -->
         <!-- <div class="col-sm-3 bg-white">
             <div class=" ">
@@ -143,7 +147,7 @@
                    
                         
                 </div>
-            </div> -->
-        </div>
+            </div> 
+         </div> -->
     </div>
 </div>

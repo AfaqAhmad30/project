@@ -122,12 +122,9 @@
         });
     };
 
-    this.getFol = function(userId) {
-        // console.log(userId)
-        $http.post('/api/getFol', {userId: userId}).then((totalFollowers) => {
-            console.log(totalFollowers);
-        }).catch((err) => {
-            console.log(err);
-        });
-    };
+    // $http.get('/api/getRandomUsers').then((users) => {
+    //     console.log(users);
+    // }).catch((err) => {
+    //     console.log(err);
+    // });
 });

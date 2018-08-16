@@ -325,7 +325,7 @@ module.exports = function(router) {
 
     // get all the comments for a post
     router.post('/post/getComments', (req, res) => {
-        Comment.find({postId: req.body.postId}).populate('userId', 'firstName lastName').exec().then((comments) => {
+        Comment.find({postId: req.body.postId}).populate('userId', 'firstName lastName profile').exec().then((comments) => {
             res.json(comments);
         }).catch((err) => {
             res.json(err);
@@ -347,6 +347,16 @@ module.exports = function(router) {
             res.json(err);
         });
     });
+
+
+
+    // get random users
+    // router.get('/getRandomUsers', (req, res) => {
+    //     user.findRandom().limit(10).exec(function(err, users) {
+    //         res.json(users);
+    //     });
+    // });
+
 
     return router;
 };
