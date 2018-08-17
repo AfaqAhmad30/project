@@ -53,7 +53,7 @@
                     <div class="col-10" style="margin-left: 20px;">
                         <div class="row">
                             <div class="col-10">
-                                <h6 class="post-user-name mb-0">{{ post.author.fullName}}</h6>
+                                <h6 class="post-user-name mb-0"><a href="/profile/{{post.author._id}}">{{ post.author.fullName}}</a></h6>
                                 <p class="mb-0"><small>{{ post.time }}</small></p>
                             </div>
                             <div class="col-2" ng-show="post.author._id === loginUserId">
@@ -74,7 +74,7 @@
                             <hr>
                             <div>
                                 <div>
-                                    <a href="#" ng-click="postLiked(post._id, main._id, $index)"><span class="fa fa-thumbs-o-up m-2"></span></a>
+                                    <a href="#" ng-click="postLiked(post._id, post.author._id, main._id, $index)"><span class="fa fa-thumbs-o-up m-2"></span></a>
                                         {{post.likes}}
                                     <a href="#" class="post-actions" ng-click="showHideComment = !showHideComment"><span class="fa fa-comment-o m-2 ml-4"></span></a>
                                         {{post.comments.length}}

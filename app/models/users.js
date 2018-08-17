@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var random = require('mongoose-random');
 var Schema =   mongoose.Schema;
 var bcrypt =   require('bcrypt-nodejs');
 
@@ -20,8 +19,6 @@ work:           {type: String, default: 'not provided'},
 status:         {type: String, default: 'Hey there! I am using vTrans, a social network for Transgender'},
 joinedDate:     {type: Date}
 });
-
-userSchema.plugin(random, {path: 'r'});
 
 userSchema.pre('save', function(next){
     var user = this;

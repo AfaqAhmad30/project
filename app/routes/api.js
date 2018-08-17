@@ -3,6 +3,7 @@
 var {Post} = require('../models/post');
 var {Comment} = require('../models/comment');
 var {Like} = require('../models/like');
+var {Notification} = require('../models/notification');
 
 var {Follow} = require('../models/follow');
 var user = require('../models/users');
@@ -313,6 +314,36 @@ module.exports = function(router) {
     router.post('/getPostsImages', (req, res) => {
         Post.find({author: req.body.author}).select('media').sort({_id: -1}).exec().then((posts) => {
             res.json(posts);
+        }).catch((err) => {
+            res.json(err);
+        });
+    });
+
+    // postNotification
+    router.post('/postNotification', (req, res) => {
+        var notification = new Notification();
+        if(req.body.action === 'like') {
+            notification.postId = req.body.postId;
+            notification.authorId = req.body.authorId;
+            notification.actionUserId = req.body.userId;
+            notification.action = req.body.action;
+            notification.time = new Date();
+            notification.save().then((resp) => {
+                res.json(resp);
+            }).catch((err) => {
+                res.json(err);
+            });
+        } else if(req.body.action === 'unlike') {
+            Notification.findOneAndRemove({postId: req.body.postId, actionUserId: req.body.userId, action: 'like'}).then((resp) => {
+                res.json(resp);
+            });
+        }
+    });
+
+    // getNotification
+    router.post('/getNotification', (req, res) => {
+        Notification.find({authorId: req.body.authorId}).populate('actionUserId').sort({time: -1}).exec().then((resp) => {
+            res.json(resp);
         }).catch((err) => {
             res.json(err);
         });

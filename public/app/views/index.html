@@ -53,6 +53,7 @@
     <script src="/app/services/userServices.js"></script>
     <script src="/app/services/authServices.js"></script>
     <script src="/app/controllers/proUpdateCtrl.js"></script>
+    <script src="/app/controllers/notificationCtrl.js"></script>
 
     <!-- moment js file for timestamp -->
     <script src="/assets/js/moment.js"></script>
@@ -73,9 +74,9 @@
                 </li>
                
               <li class="nav-item mx-2">
-                <a ng-show="main.isLoggedIn" class="nav-link msgLoc" ng-click="main.doActive('messages')" href="/messages">
-                  <i class="fa fa-envelope"> </i>
-                  Messages
+                <a ng-show="main.isLoggedIn" class="nav-link msgLoc" ng-click="main.doActive('messages')" href="/notification">
+                  <i class="fa fa-bell"> </i>
+                  Notifications
                 </a>
               </li>
 

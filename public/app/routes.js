@@ -20,8 +20,8 @@ angular.module('appRoutes',['ngRoute'])
         .when('/profile/:userId', {
             templateUrl: 'app/views/pages/profile.html'
         })
-        .when('/messages', {
-            templateUrl: 'app/views/pages/messages.html'
+        .when('/notification', {
+            templateUrl: 'app/views/pages/notification.html'
         })
         .when('/search', {
             templateUrl: 'app/views/pages/searcUsers.html'

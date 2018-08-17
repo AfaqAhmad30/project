@@ -100,7 +100,7 @@
                                 <hr>
                                 <div>
                                     <div>
-                                        <a href="#" ng-click="postLiked(post._id, main._id, $index)"><span class="fa fa-thumbs-o-up m-2"></span></a>
+                                        <a href="#" ng-click="postLiked(post._id, post.author._id, main._id, $index)"><span class="fa fa-thumbs-o-up m-2"></span></a>
                                             {{post.likes}}
                                         <a href="#" class="post-actions" ng-click="showHideComment = !showHideComment"><span class="fa fa-comment-o m-2 ml-4"></span></a>
                                             {{post.comments.length}}

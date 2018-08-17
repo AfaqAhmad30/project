@@ -12,8 +12,6 @@ var followSchema = new Schema({
     }  
 });
 
-//followSchema.index({'follower': 1, 'followed': 1}, {'unique': true});
-
 var Follow =  mongoose.model('follow', followSchema);
 
 module.exports = {Follow};

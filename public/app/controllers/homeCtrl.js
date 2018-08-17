@@ -81,13 +81,24 @@ angular.module('homeControllers', ['ngFileUpload'])
     };
 
     // like or unlike a post
-    $scope.postLiked = (postId, userId, index) => {
+    $scope.postLiked = (postId, authorId, userId, index) => {
+        var message = '';
         $http.post('/api/postLiked', { postId: postId, userId: userId }).then((resp) => {
             if(resp.data.message === 'post like') {
                 $scope.homePosts[index].likes++;
+                message = 'like';
             } else {
                 $scope.homePosts[index].likes--;
+                message = 'unlike';
             }
+
+            // push notification
+            if(authorId !== userId) {
+                $http.post('/api/postNotification', {postId: postId, authorId: authorId, userId: userId, action: message}).then((resp) => {
+                    console.log(resp);
+                });
+            }
+
         }).catch((err) => {
             console.log(err);
         })
